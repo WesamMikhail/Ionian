@@ -1,4 +1,7 @@
 <?php
+namespace Controllers;
+use Core\Controller as Controller;
+
 class HomeController extends Controller{
     public function viewAction(){
         $this->renderView("main_view.php", array("DATA" => "SAMPLE DATA FOR THE VIEW TO SHOW!"));

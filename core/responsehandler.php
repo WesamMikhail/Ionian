@@ -1,4 +1,6 @@
 <?php
+namespace Core;
+
 Class ResponseHandler{
 
     private $code = 200;

@@ -1,4 +1,6 @@
 <?php
+namespace Core;
+
 Class XML{
     /**
      * Covert a regular PHP array into an XML node

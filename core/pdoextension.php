@@ -1,4 +1,6 @@
 <?php
+namespace Core;
+
 //TODO Expand Class
 class PDOExtension extends PDO{
     function __construct($driver, $host, $db, $user, $password, $options = null){

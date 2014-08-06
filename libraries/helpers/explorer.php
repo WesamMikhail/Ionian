@@ -1,5 +1,7 @@
 <?php
-class Helpers_Explorer {
+namespace Libraries\Helpers;
+
+class Explorer {
 
     /**
      * Get all directory files and directories

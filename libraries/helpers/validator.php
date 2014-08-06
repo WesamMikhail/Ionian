@@ -1,5 +1,7 @@
 <?php
-class Helpers_Validator{
+namespace Libraries\Helpers;
+
+class Validator{
     /**
      * Check if email is valid!
      *
@@ -12,5 +14,29 @@ class Helpers_Validator{
         return false;
     }
 
+    /**
+     * Check if value/values are not empty
+     * This method uses func_get_args() so you can pass in as many variables/items as you want!
+     *
+     * @return boolean True if all value/values are not empty, false if one of the elements are empty
+     */
+    public static function isNotEmpty() {
+        $args = func_get_args();
+
+        foreach ($args as $item) {
+
+            if (is_array($item)) {
+                if (empty($item))
+                    return false;
+            }
+            else {
+                $item = trim($item);
+                if (empty($item) && $item !== "0") //0 as string is allowed, a field can be zero as string
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
 

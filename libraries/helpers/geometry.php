@@ -1,6 +1,7 @@
 <?php
+namespace Libraries\Helpers;
 
-class Helpers_Geometry {
+class Geometry {
 
     /**
      * Method for determining in case a point is within a long/lat polygon

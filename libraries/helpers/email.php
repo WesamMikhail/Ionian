@@ -1,6 +1,7 @@
 <?php
+namespace Libraries\Helpers;
 
-class Helpers_Email {
+class Email {
     /**
      *
      * @param string $to

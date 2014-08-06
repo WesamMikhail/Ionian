@@ -1,4 +1,7 @@
 <?php
+namespace Core;
+
+
 class View{
     private $data;
     private $css = array();

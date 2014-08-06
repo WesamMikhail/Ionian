@@ -1,5 +1,7 @@
 <?php
-class Helpers_Arrays{
+namespace Libraries\Helpers;
+
+class Arrays{
 
     /**
      * Strip slashes for arrays!

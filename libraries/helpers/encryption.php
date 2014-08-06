@@ -1,5 +1,7 @@
 <?php
-class Helpers_Encryption{
+namespace Libraries\Helpers;
+
+class Encryption{
     /**
      * Generate a random string with repeatable letters.
      *

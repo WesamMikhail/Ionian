@@ -1,4 +1,6 @@
 <?php
+namespace Core;
+
 class requestHandler {
     private $routeTable = array();
     public $controller;

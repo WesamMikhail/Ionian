@@ -1,4 +1,6 @@
 <?php
+namespace Libraries\Amazon;
+
 /**
  * AWS E-COMMERCE SERVICE!
  * AWSECommerceService
@@ -6,18 +8,18 @@
  * This class is a wrapper class that will take care of creating the correct 
  * Amazon request and parsing it using XML. 
  * 
- * usage.
-  //Create amazon class isntance
-  $aws = new AmazonAWS($AWS_PUBLIC_KEY, $AWS_PRIVATE_KEY, "com");
-
-  //Create the required signed request
-  $request = $aws->aws_signed_request(array("Operation" => "ItemSearch", "Keywords" => $this->post["phrase"], "SearchIndex" => "All", "ResponseGroup" => "Images,ItemAttributes", "AssociateTag" => $associateTag));
-
-  //Get XML and output it
-  $xml = json_decode(json_encode(@simplexml_load_file($request)));
+ * usage:
+ * Create amazon class isntance
+ * $aws = new AmazonAWS($AWS_PUBLIC_KEY, $AWS_PRIVATE_KEY, "com");
+ *
+ * Create the required signed request
+ * $request = $aws->aws_signed_request(array("Operation" => "ItemSearch", "Keywords" => $this->post["phrase"], "SearchIndex" => "All", "ResponseGroup" => "Images,ItemAttributes", "AssociateTag" => $associateTag));
+ *
+ * Get XML and output it
+ * $xml = json_decode(json_encode(@simplexml_load_file($request)));
  */
 
-class Amazon_ECS {
+class ECS {
 
     private $publicKey;
     private $privateKey;

@@ -18,15 +18,7 @@ else{
 //AUTOLOADER
 function __autoload($class){
     $class = str_replace('_', DIRECTORY_SEPARATOR, $class).'.php';
-
-    if (is_readable(ROOT . "/core/" . $class))
-        require_once ROOT . "/core/" . $class;
-
-    else if (is_readable(ROOT . "/controllers/" . $class))
-        require_once ROOT . "/controllers/" . $class;
-
-    else if (is_readable(ROOT . "/libraries/" . $class))
-        require_once ROOT . "/libraries/" . $class;
+    require_once $class;
 }
 
 
@@ -41,7 +33,7 @@ Translated URI:       (www.asd.com/view/12345678/facebook/ABC123)
                       HomeController->ViewAction()
                       HomeController->params = array(view_id = 12345678, referrer => "facebook", ...)
 */
-$request = new requestHandler();
+$request = new Core\requestHandler();
 $request->route("/api", "home@api");
 $request->route("/view","home@view");
 $request->route("/view/:testparam","home@test");
@@ -49,13 +41,13 @@ $request->matchRoute();
 
 
 //ResponseHandler compiles the response data into either a VIEW or API data via JSON/XML or JSONP
-$response = new ResponseHandler();
-
 //ADD response codes if you need to use them for the API!
+$response = new Core\ResponseHandler();
 #$response->addResponseCodes(array("999" => "Some Error Msg!"));
 
 
 //Initiate the request according to the parsed requested resource
-$controller = new $request->controller($request->params, $response, $db);
+$class = "Controllers\\" . $request->controller;
+$controller = new $class($request->params, $response, $db);
 $controller->{$request->action}();
 

@@ -1,4 +1,6 @@
 <?php
+namespace Core;
+
 abstract class Controller {
     protected $responseHandler;
     protected $params;

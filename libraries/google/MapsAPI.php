@@ -1,5 +1,7 @@
 <?php
-class Google_MapsAPI {
+namespace Libraries\Google;
+
+class MapsAPI {
 
     private $base_url = "http://maps.google.com/maps/api/geocode/json?sensor=false";
 
