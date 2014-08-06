@@ -87,7 +87,7 @@ Class ResponseHandler{
         if($this->content !== null)
             $output["response"] = $this->content;
 
-        print_r(JSON::arrayToReadableJSON($output));
+        print_r(json_encode($output, JSON_PRETTY_PRINT));
     }
 
     private function JSONP($callback){
@@ -101,7 +101,7 @@ Class ResponseHandler{
             $output["response"] = $this->content;
 
 
-        print_r($callback . "( " . JSON::arrayToReadableJSON($output) . " )");
+        print_r($callback . "( " . json_encode($output, JSON_PRETTY_PRINT) . " )");
     }
 
     private function XML(){
