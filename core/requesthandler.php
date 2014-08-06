@@ -3,15 +3,14 @@ namespace Core;
 
 class requestHandler {
     private $routeTable = array();
-    public $controller;
-    public $action;
-    public $params = array();
-    public $ip;
+    private $controller;
+    private $action;
+    private $params = array();
+    private $ip;
 
     function __construct() {
         $this->ip = $_SERVER["REMOTE_ADDR"];
     }
-
 
     /**
      * Set a pattern to match for routing
@@ -96,5 +95,60 @@ class requestHandler {
         return $this->routeTable;
     }
 
+    /**
+     * @param mixed $action
+     */
+    public function setAction($action) {
+        $this->action = $action;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAction() {
+        return $this->action;
+    }
+
+    /**
+     * @param mixed $controller
+     */
+    public function setController($controller) {
+        $this->controller = $controller;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getController() {
+        return $this->controller;
+    }
+
+    /**
+     * @param mixed $ip
+     */
+    public function setIp($ip) {
+        $this->ip = $ip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIp() {
+        return $this->ip;
+    }
+
+    /**
+     * @param array $params
+     */
+    public function setParams($params) {
+        $this->params = $params;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParams() {
+        return $this->params;
+    }
 
 }

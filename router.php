@@ -47,7 +47,7 @@ $response = new Core\ResponseHandler();
 
 
 //Initiate the request according to the parsed requested resource
-$class = "Controllers\\" . $request->controller;
-$controller = new $class($request->params, $response, $db);
-$controller->{$request->action}();
+$class = "Controllers\\" . $request->getController();
+$controller = new $class($request->getParams(), $response, $db);
+$controller->{$request->getAction()}();
 
