@@ -65,9 +65,9 @@ class requestHandler {
                     //If exists, add the parameter to the params variable with the ID specified by the routing rule!
                     //The IDs are bound by location of the param. The first parameter gets the first ID, second one gets second ID, etc.
                     //Ex.
-                    //routeRule:    "/vods/:vod_id/:seo_link
-                    //URI:          "/vods/21312/asdasd"
-                    //This generates the following params array: array("vod_id" => 21312, "seo_link"=> asdasd)
+                    //routeRule:    "/home/:article_id/:seo_link
+                    //URI:          "/home/21312/asdasd"
+                    //This generates the following params array: array("article_id" => 21312, "seo_link"=> asdasd)
                     if (!empty($path[$number + 1]))
                         $this->params[ltrim($id, ":")] = $path[$number + 1];
 
