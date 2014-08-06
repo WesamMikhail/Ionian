@@ -27,11 +27,19 @@ else{
 //session_start();                                                                    //Session always active
 //session_set_cookie_params(SESSION_LIFETIME, '/', '.' . SERVICE_DOMAIN);             //Session configurations
 
-//AUTOLOADERS
-require_once ROOT . "/core/autoloader.php";
-spl_autoload_register('AutoLoader::coreLoader');
-spl_autoload_register('AutoLoader::controllerLoader');
-spl_autoload_register("AutoLoader::libraryLoader");
+//AUTOLOADER
+function __autoload($class){
+    $class = str_replace('_', DIRECTORY_SEPARATOR, $class).'.php';
+
+    if (is_readable(ROOT . "/core/" . $class))
+        require_once ROOT . "/core/" . $class;
+
+    else if (is_readable(ROOT . "/controllers/" . $class))
+        require_once ROOT . "/controllers/" . $class;
+
+    else if (is_readable(ROOT . "/libraries/" . $class))
+        require_once ROOT . "/libraries/" . $class;
+}
 
 //Handle request via resource routing. Each param position associated with an ID according to the routing rule you enter below!
 //URI Routing is based on: /RESOURCE/:PARAM_ID/:PARAM_ID/:PARAM_ID. EX:
