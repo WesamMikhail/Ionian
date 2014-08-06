@@ -1,4 +1,4 @@
-PHP-Framework
+PHP-Framework - (PHP 5.4+)
 =============
 
 This is a pretty simple little framework that works as a resource router.
