@@ -15,18 +15,6 @@ else{
     error_reporting(0);
 }
 
-/* IF YOU NEED DB ACCESS UNCOMMENT AND EDIT THESE CONSTANTS */
-//define('MYSQL_HOST', "");
-//define('MYSQL_DB', "");
-//define('MYSQL_USER', "");
-//define('MYSQL_PASSWORD', "");
-
-
-/* IF YOU NEED SESSION ACCESS UNCOMMENT AND EDIT THESE CONSTANTS */
-//define('SESSION_LIFETIME', 86400);                                                  //Session lifetime in seconds - set to 24h default
-//session_start();                                                                    //Session always active
-//session_set_cookie_params(SESSION_LIFETIME, '/', '.' . SERVICE_DOMAIN);             //Session configurations
-
 //AUTOLOADER
 function __autoload($class){
     $class = str_replace('_', DIRECTORY_SEPARATOR, $class).'.php';
@@ -41,10 +29,18 @@ function __autoload($class){
         require_once ROOT . "/libraries/" . $class;
 }
 
-//Handle request via resource routing. Each param position associated with an ID according to the routing rule you enter below!
-//URI Routing is based on: /RESOURCE/:PARAM_ID/:PARAM_ID/:PARAM_ID. EX:
-//RAW RULE                    /view/:view_id/:referrer/:api_key         "home@view"
-//Translated URI:       DOMAIN/view/12345678/facebook/ABC123            HomeController->ViewAction()
+
+//Database Handler in case DB connection is needed. Replace the current line with the commented one
+$db = null;
+#$db = new PDOExtension("mysql", "host", "db", "user", "password");
+
+/*
+Handle request via resource routing. Each param position associated with an ID according to the routing rule you enter below!
+RAW RULE:             (/view/:view_id/:referrer/:api_key, "home@view")
+Translated URI:       (www.asd.com/view/12345678/facebook/ABC123)
+                      HomeController->ViewAction()
+                      HomeController->params = array(view_id = 12345678, referrer => "facebook", ...)
+*/
 $request = new requestHandler();
 $request->route("/api", "home@api");
 $request->route("/view","home@view");
@@ -56,10 +52,10 @@ $request->matchRoute();
 $response = new ResponseHandler();
 
 //ADD response codes if you need to use them for the API!
-//$response->addResponseCodes(array("999" => "Some Error Msg!"));
+#$response->addResponseCodes(array("999" => "Some Error Msg!"));
 
 
 //Initiate the request according to the parsed requested resource
-$controller = new $request->controller($request->params, $response);
+$controller = new $request->controller($request->params, $response, $db);
 $controller->{$request->action}();
 
