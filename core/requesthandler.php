@@ -1,7 +1,7 @@
 <?php
 namespace Core;
 
-class requestHandler {
+class RequestHandler {
     private $routeTable = array();
     private $controller;
     private $action;
@@ -46,7 +46,18 @@ class requestHandler {
     public function matchRoute() {
 
         //Incoming request URI
-        $path = explode("/", parse_url(ltrim($_SERVER["REQUEST_URI"], "/"), PHP_URL_PATH));
+        $uri = explode("/", parse_url(rtrim($_SERVER["REQUEST_URI"], "/"), PHP_URL_PATH));
+        $script = explode("/", rtrim($_SERVER["SCRIPT_NAME"], "/"));
+
+        for($i= 0;$i < sizeof($script);$i++){
+            if ((isset($uri[$i])) && ($uri[$i] == $script[$i]))
+                unset($uri[$i]);
+        }
+
+        $path = array_values($uri);
+
+        if(empty($path))
+            $path[] = ""; //If $path is empty, that means the request was made to / which was trimmed. See next line!
 
         //We check if the URI is identical to a pre-defined route
         if (isset($this->routeTable["/" . $path[0]][count($path) - 1])) {

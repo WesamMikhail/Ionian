@@ -33,10 +33,14 @@ Translated URI:       (www.asd.com/view/12345678/facebook/ABC123)
                       HomeController->ViewAction()
                       HomeController->params = array(view_id = 12345678, referrer => "facebook", ...)
 */
-$request = new Core\requestHandler();
+//todo fix "/:param" this will lead to confusion
+//todo redo the whole RequestHandler() and ResponseHandler()
+$request = new Core\RequestHandler();
+$request->route("/", "home@api");
 $request->route("/api", "home@api");
 $request->route("/view","home@view");
 $request->route("/view/:testparam","home@test");
+$request->route("/view/testparam/:testicles/:paniz","home@test2");
 $request->matchRoute();
 
 
