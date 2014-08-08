@@ -1,5 +1,6 @@
 <?php
 namespace Core;
+use PDO;
 
 //TODO Expand Class
 class PDOExtension extends PDO{

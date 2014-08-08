@@ -20,6 +20,13 @@ class RequestHandler {
      * @param $destination
      */
     public function route($location, $destination) {
+        $location = strtolower($location);
+        $destination = strtolower($destination);
+
+        //Dirty way to handle the /:PARAM routing rule which should not work!!
+        if(substr($location, 0, 2) == "/:")
+            return ;
+
         //location us the URI, destination is the Resource
         $location = explode("/", ltrim($location, "/"));
 
@@ -46,8 +53,8 @@ class RequestHandler {
     public function matchRoute() {
 
         //Incoming request URI
-        $uri = explode("/", parse_url(rtrim($_SERVER["REQUEST_URI"], "/"), PHP_URL_PATH));
-        $script = explode("/", rtrim($_SERVER["SCRIPT_NAME"], "/"));
+        $uri = explode("/", parse_url(rtrim(strtolower($_SERVER["REQUEST_URI"]), "/"), PHP_URL_PATH));
+        $script = explode("/", rtrim(strtolower($_SERVER["SCRIPT_NAME"]), "/"));
 
         for($i= 0;$i < sizeof($script);$i++){
             if ((isset($uri[$i])) && ($uri[$i] == $script[$i]))
