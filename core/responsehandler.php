@@ -5,7 +5,7 @@ Class ResponseHandler{
 
     private $code = 200;
     private $content = null;
-    private $_CODES = array(
+    private $codes = array(
         "200" => "Success!",
         "401" => "Unauthorized Resource / Incorrect Password!",
         "403" => "Authentication Required!",
@@ -18,7 +18,7 @@ Class ResponseHandler{
      * @param array $codes
      */
     public function setResponseCodes($codes) {
-        $this->_CODES = $codes;
+        $this->codes = $codes;
     }
 
     /**
@@ -27,7 +27,7 @@ Class ResponseHandler{
      * @param array $codes
      */
     public function addResponseCodes($codes){
-        $this->_CODES = array_merge($this->_CODES, $codes);
+        $this->codes = array_merge($this->codes, $codes);
     }
 
     /**
@@ -84,7 +84,7 @@ Class ResponseHandler{
 
         $output["code"] = $this->code;
         $output["type"] = "json";
-        $output["message"] = $this->_CODES[$this->code];
+        $output["message"] = $this->codes[$this->code];
 
         if($this->content !== null)
             $output["response"] = $this->content;
@@ -97,7 +97,7 @@ Class ResponseHandler{
 
         $output["code"] = $this->code;
         $output["type"] = "jsonp";
-        $output["message"] = $this->_CODES[$this->code];
+        $output["message"] = $this->codes[$this->code];
 
         if($this->content != null)
             $output["response"] = $this->content;
@@ -111,7 +111,7 @@ Class ResponseHandler{
 
         $xml->addChild("code", $this->code);
         $xml->addChild("type", "xml");
-        $xml->addChild("message", $this->_CODES[$this->code]);
+        $xml->addChild("message", $this->codes[$this->code]);
 
         if($this->content != null){
             if(is_array($this->content))

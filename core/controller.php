@@ -6,10 +6,16 @@ abstract class Controller {
     protected $params;
     protected $db;
 
-    function __construct($params, $responseHandler, $db = null){
-        $this->params = $params;
+    function __construct($responseHandler){
         $this->responseHandler = $responseHandler;
+    }
+
+    public function setDB($db){
         $this->db = $db;
+    }
+
+    public function setParams($params){
+        $this->params = $params;
     }
 
     public function renderAPI($code, $data = null){

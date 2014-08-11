@@ -1,10 +1,9 @@
 <?php
-//AUTOLOADER
+/* AUTOLOADER */
 function __autoload($class) {
     $class = str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
     require_once $class;
 }
-
 
 /* REDEFINE THESE VARIABLES FOR YOUR PROJECT! */
 define('ROOT', dirname(__FILE__));
@@ -23,31 +22,53 @@ else {
 }
 
 
-//Database Handler in case DB connection is needed. Replace the current line with the commented one
-$db = null;
+/* DB CONNECTION. UNCOMMENT IF NEEDED */
 #$db = new Core\PDOExtension("mysql", "host", "db", "user", "password");
 
-//Handle each request via resource routing. Everything is case-insensitive!
-//Ex.       DOMAIN.COM/News/art1234
-//Route:    ("/news/:article_id", "news@getArticle")
-$request = new Core\RequestHandler();
-$request->route("/", "home@api");
-$request->route("/api", "home@api");
-$request->route("/view", "home@view");
-$request->route("/view/:testparam", "home@test");
-$request->route("/view/test/:testicles/:paniz", "home@test");
-$request->matchRoute();
 
-//ResponseHandler compiles the response data into either a VIEW or API data via JSON/XML or JSONP
+/* PARSE INCOMING REQUEST */
+$uri = explode("/", parse_url(rtrim(strtolower($_SERVER["REQUEST_URI"]), "/"), PHP_URL_PATH));
+$script = explode("/", rtrim(strtolower($_SERVER["SCRIPT_NAME"]), "/"));
+
+//Match URI vs SCRIPT_NAME in order to enable subdirectory support!
+for($i= 0;$i < sizeof($script);$i++){
+    if ((isset($uri[$i])) && ($uri[$i] == $script[$i]))
+        unset($uri[$i]);
+}
+
+$path = array_values($uri);
+
+//Default controller is the ErrorsController
+$controller = "Controllers\\ErrorsController";
+$action = "notfoundAction";
+
+//If request made to ROOT /
+if(count($path) == 0){
+    $controller = "Controllers\\HomeController";
+    $action = "viewAction";
+}
+
+//If request made to /controller/action
+else if(count($path) >= 2){
+    $controller = "Controllers\\" . $path[0] . "Controller";
+    $action = $path[1] . "Action";
+    $params = array_slice($path, 2);
+}
+
+if(!is_readable($controller . ".php") || !method_exists($controller, $action)){
+    $controller = "Controllers\\ErrorsController";
+    $action = "notfoundAction";
+}
+
+
+/* RESPONSE RENDERER. CAN RENDER JSON/XML/JSONP API OR REGULAR TEMPLATE VIEW*/
 $response = new Core\ResponseHandler();
+#$response->addResponseCodes(array("999" => "Some Error Msg!")); //ADD response codes if you need to use them for the API!
 
-//ADD response codes if you need to use them for the API!
-#$response->addResponseCodes(array("999" => "Some Error Msg!"));
+//Todo pass in params as arguments to function
 
-
-//Initiate the request according to the parsed requested resource
-//TODO: pass the params to the fucntions as argument rather than class variable
-$class = "Controllers\\" . $request->getController();
-$controller = new $class($request->getParams(), $response, $db);
-$controller->{$request->getAction()}();
-
+/* INITIATE REQUEST */
+$controller = new $controller($response);
+if(isset($db)) $controller->setDB($db);
+if(isset($params)) $controller->setParams($params);
+$controller->$action();
