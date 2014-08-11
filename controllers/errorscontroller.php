@@ -6,4 +6,8 @@ class ErrorsController extends Controller{
     public function notfoundAction(){
         $this->renderAPI(404);
     }
+
+    public function notcompleteAction(){
+        $this->renderAPI(400);
+    }
 }

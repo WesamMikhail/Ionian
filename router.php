@@ -26,6 +26,11 @@ else {
 #$db = new Core\PDOExtension("mysql", "host", "db", "user", "password");
 
 
+/* RESPONSE RENDERER. CAN RENDER JSON/XML/JSONP API OR REGULAR TEMPLATE VIEW*/
+$response = new Core\ResponseHandler();
+#$response->addResponseCodes(array("999" => "Some Error Msg!")); //ADD response codes if you need to use them for the API!
+
+
 /* PARSE INCOMING REQUEST */
 $uri = explode("/", parse_url(rtrim(strtolower($_SERVER["REQUEST_URI"]), "/"), PHP_URL_PATH));
 $script = explode("/", rtrim(strtolower($_SERVER["SCRIPT_NAME"]), "/"));
@@ -41,6 +46,8 @@ $path = array_values($uri);
 //Default controller is the ErrorsController
 $controller = "Controllers\\ErrorsController";
 $action = "notfoundAction";
+$params = array();
+
 
 //If request made to ROOT /
 if(count($path) == 0){
@@ -59,16 +66,18 @@ if(!is_readable($controller . ".php") || !method_exists($controller, $action)){
     $controller = "Controllers\\ErrorsController";
     $action = "notfoundAction";
 }
+else{
+    $classMethod = new ReflectionMethod($controller, $action);
+    $funcArgs = $classMethod->getNumberOfRequiredParameters();
 
+    if(count($params) < count($funcArgs)){
+        $controller = "Controllers\\ErrorsController";
+        $action = "notcompleteAction";
+    }
+}
 
-/* RESPONSE RENDERER. CAN RENDER JSON/XML/JSONP API OR REGULAR TEMPLATE VIEW*/
-$response = new Core\ResponseHandler();
-#$response->addResponseCodes(array("999" => "Some Error Msg!")); //ADD response codes if you need to use them for the API!
-
-//Todo pass in params as arguments to function
 
 /* INITIATE REQUEST */
 $controller = new $controller($response);
 if(isset($db)) $controller->setDB($db);
-if(isset($params)) $controller->setParams($params);
-$controller->$action();
+call_user_func_array(array($controller, $action), $params); //Pass in params as method arguments

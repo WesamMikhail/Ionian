@@ -3,7 +3,6 @@ namespace Core;
 
 abstract class Controller {
     protected $responseHandler;
-    protected $params;
     protected $db;
 
     function __construct($responseHandler){
@@ -12,10 +11,6 @@ abstract class Controller {
 
     public function setDB($db){
         $this->db = $db;
-    }
-
-    public function setParams($params){
-        $this->params = $params;
     }
 
     public function renderAPI($code, $data = null){

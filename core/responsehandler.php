@@ -7,6 +7,7 @@ Class ResponseHandler{
     private $content = null;
     private $codes = array(
         "200" => "Success!",
+        "400" => "Bad Request. The Request is not complete. Parameters might be missing!",
         "401" => "Unauthorized Resource / Incorrect Password!",
         "403" => "Authentication Required!",
         "404" => "Invalid Request or Resource!"
