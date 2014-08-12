@@ -43,9 +43,8 @@ for($i= 0;$i < sizeof($script);$i++){
 
 $path = array_values($uri);
 
-//Default controller is the ErrorsController
-$controller = "Controllers\\ErrorsController";
-$action = "notfoundAction";
+$controller = "";
+$action = "";
 $params = array();
 
 
@@ -62,7 +61,7 @@ else if(count($path) >= 2){
     $params = array_slice($path, 2);
 }
 
-if(!is_readable($controller . ".php") || !method_exists($controller, $action)){
+if(empty($controller) || (!is_readable($controller . ".php")) || (!method_exists($controller, $action))){
     $controller = "Controllers\\ErrorsController";
     $action = "notfoundAction";
 }
@@ -70,12 +69,11 @@ else{
     $classMethod = new ReflectionMethod($controller, $action);
     $funcArgs = $classMethod->getNumberOfRequiredParameters();
 
-    if(count($params) < count($funcArgs)){
+    if(count($params) < $funcArgs){
         $controller = "Controllers\\ErrorsController";
         $action = "notcompleteAction";
     }
 }
-
 
 /* INITIATE REQUEST */
 $controller = new $controller($response);

@@ -11,7 +11,7 @@ class HomeController extends Controller{
         $this->renderAPI(200, array("DATA" => "SAMPLE DATA"));
     }
 
-    public function testAction(){
-        $this->renderView("main_view.php", array("PARAMS" => $this->params));
+    public function testAction($test){
+        $this->renderView("main_view.php", array("PARAMS" => $test));
     }
 }
