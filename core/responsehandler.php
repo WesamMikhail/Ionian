@@ -5,13 +5,7 @@ Class ResponseHandler {
 
     private $code = 200;
     private $content = null;
-    private $codes = array(
-        "200" => "Success!",
-        "400" => "Bad Request. The Request is not complete. Parameters might be missing!",
-        "401" => "Unauthorized Resource / Incorrect Password!",
-        "403" => "Authentication Required!",
-        "404" => "Invalid Request or Resource!"
-    );
+    private $codes;
 
     /**
      * Sets the array of error codes that the application can use
@@ -20,15 +14,6 @@ Class ResponseHandler {
      */
     public function setResponseCodes($codes) {
         $this->codes = $codes;
-    }
-
-    /**
-     * Merges the current array of error codes with the provided one in order to extend it!
-     *
-     * @param array $codes
-     */
-    public function addResponseCodes($codes) {
-        $this->codes = array_merge($this->codes, $codes);
     }
 
     /**

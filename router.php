@@ -28,7 +28,13 @@ else {
 
 /* RESPONSE RENDERER. CAN RENDER JSON/XML/JSONP API OR REGULAR TEMPLATE VIEW*/
 $response = new Core\ResponseHandler();
-#$response->addResponseCodes(array("999" => "Some Error Msg!")); //ADD response codes if you need to use them for the API!
+$response->setResponseCodes(array(
+    "200" => "Success!",
+    "400" => "Bad Request. The Request is not complete. Parameters might be missing!",
+    "401" => "Unauthorized Resource / Incorrect Password!",
+    "403" => "Authentication Required!",
+    "404" => "Invalid Request or Resource!",
+    ));
 
 
 /* PARSE INCOMING REQUEST */
