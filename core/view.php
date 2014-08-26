@@ -6,7 +6,7 @@ class View{
     private $data;
     private $css = array();
     private $js = array();
-    private $title = "Untitled Page!";
+    private $title;
 
 
     /**
@@ -30,7 +30,7 @@ class View{
      * @param String $file filename
      */
     public function addCSS($file){
-        $this->css[] = "/views/css/" . $file;
+        $this->css[] = "./views/css/" . $file;
     }
 
     /**
@@ -39,7 +39,7 @@ class View{
      * @param String $file filename
      */
     public function addJS($file){
-        $this->js[] = "/views/js/" . $file;
+        $this->js[] = "./views/js/" . $file;
     }
 
     /**

@@ -7,7 +7,12 @@ $this->addJS("test.js");
 <html>
 <head>
     <!-- Document Title Dynamically loaded -->
-    <?php echo "<title>{$this->getTitle()}</title>" ?>
+    <?php
+        if(!empty($this->getTitle()))
+            echo "<title>" . $this->getTitle() . "</title>";
+        else
+            echo "<title>" . APPLICATION_NAME . "</title>";
+    ?>
 
     <!-- Document CSS Files Dynamically loaded -->
     <?php foreach($this->getCSS() as $file) echo "<link href='$file' rel='stylesheet' type='text/css'>"; ?>
