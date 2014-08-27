@@ -60,6 +60,12 @@ if(count($path) == 0){
     $action = "viewAction";
 }
 
+//IF request made to /controller add /index as action
+else if(count($path) == 1){
+    $controller = "Controllers\\" . $path[0] . "Controller";
+    $action = "indexAction";
+}
+
 //If request made to /controller/action
 else if(count($path) >= 2){
     $controller = "Controllers\\" . $path[0] . "Controller";
