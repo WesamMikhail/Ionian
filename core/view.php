@@ -30,7 +30,7 @@ class View{
      * @param String $file filename
      */
     public function addCSS($file){
-        $this->css[] = "./views/css/" . $file;
+        $this->css[] = APPLICATION_FOLDER . "/views/css/" . $file;
     }
 
     /**
@@ -39,7 +39,7 @@ class View{
      * @param String $file filename
      */
     public function addJS($file){
-        $this->js[] = "./views/js/" . $file;
+        $this->js[] = APPLICATION_FOLDER . "/views/js/" . $file;
     }
 
     /**

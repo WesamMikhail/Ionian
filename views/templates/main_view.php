@@ -8,10 +8,14 @@ $this->addJS("test.js");
 <head>
     <!-- Document Title Dynamically loaded -->
     <?php
-        if(!empty($this->getTitle()))
-            echo "<title>" . $this->getTitle() . "</title>";
-        else
-            echo "<title>" . APPLICATION_NAME . "</title>";
+
+    //Title has to be in a variable because empty does not execute on a function as value!
+    $title = $this->getTitle();
+
+    if (!empty($title))
+        echo "<title>" . $this->getTitle() . "</title>";
+    else
+        echo "<title>" . APPLICATION_NAME . "</title>";
     ?>
 
     <!-- Document CSS Files Dynamically loaded -->

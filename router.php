@@ -1,4 +1,9 @@
 <?php
+//TODO make different routing classes.
+//First class can be /controller/action based
+//Second class can be /resource/ID
+//Third class...
+
 /* AUTOLOADER */
 function __autoload($class) {
     $class = str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
@@ -10,6 +15,8 @@ define('ROOT', dirname(__FILE__));
 define('DEVELOPER', true);
 define('SERVICE_DOMAIN', ""); //The site domain
 define('APPLICATION_NAME', ""); //Application name to be used in various libraries
+define('APPLICATION_FOLDER', ""); //Start folder. Use this if you are working locally without Virtual Hosts setup, else leave empty!
+
 
 //Set error reporting mode for debugging
 if (DEVELOPER) {
@@ -48,6 +55,10 @@ for($i= 0;$i < sizeof($script);$i++){
 }
 
 $path = array_values($uri);
+
+
+
+//TODO change router to OOP
 
 $controller = "";
 $action = "";
