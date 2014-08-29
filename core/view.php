@@ -8,7 +8,6 @@ class View{
     private $js = array();
     private $title;
 
-
     /**
      * Render the View from the given template!
      */
@@ -30,7 +29,7 @@ class View{
      * @param String $file filename
      */
     public function addCSS($file){
-        $this->css[] = APPLICATION_FOLDER . "/views/css/" . $file;
+        $this->css[] = $this->getCSSLink($file);
     }
 
     /**
@@ -39,7 +38,7 @@ class View{
      * @param String $file filename
      */
     public function addJS($file){
-        $this->js[] = APPLICATION_FOLDER . "/views/js/" . $file;
+        $this->js[] = $this->getJSLink($file);
     }
 
     /**
@@ -54,6 +53,46 @@ class View{
      */
     public function getJS() {
         return $this->js;
+    }
+
+    /**
+     * Returns absolute URL to image location
+     *
+     * @param String $file
+     * @return string absolute path to img file
+     */
+    public function getImageLink($file){
+        return IMG_FOLDER . $file;
+    }
+
+    /**
+     * return absolute path for CSS file
+     *
+     * @param String $file
+     * @return string
+     */
+    public function getCSSLink($file){
+        return CSS_FOLDER . $file;
+    }
+
+    /**
+     * Return absolute path for JS file
+     *
+     * @param String $file
+     * @return string
+     */
+    public function getJSLink($file){
+        return JS_FOLDER . $file;
+    }
+
+    /**
+     * Convert relative link into absolute path
+     *
+     * @param String $resource the relative resource destination
+     * @return string absolute path to resource
+     */
+    public function getAbsoluteLink($resource){
+        return APPLICATION_FOLDER . $resource;
     }
 
     /**

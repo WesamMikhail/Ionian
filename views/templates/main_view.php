@@ -8,7 +8,6 @@ $this->addJS("test.js");
 <head>
     <!-- Document Title Dynamically loaded -->
     <?php
-
     //Title has to be in a variable because empty does not execute on a function as value!
     $title = $this->getTitle();
 
@@ -18,11 +17,14 @@ $this->addJS("test.js");
         echo "<title>" . APPLICATION_NAME . "</title>";
     ?>
 
+    <!-- HTML5 CSS RESET SHEET -->
+    <link href='<?php echo $this->getCSSLink("reset.css") ?>' rel='stylesheet' type='text/css'>
+
     <!-- Document CSS Files Dynamically loaded -->
-    <?php foreach($this->getCSS() as $file) echo "<link href='$file' rel='stylesheet' type='text/css'>"; ?>
+    <?php foreach ($this->getCSS() as $file) echo "<link href='$file' rel='stylesheet' type='text/css'>"; ?>
 
     <!-- Document JS Files Dynamically loaded -->
-    <?php foreach($this->getJS() as $file) echo "<script src='$file' type='text/javascript'></script>"; ?>
+    <?php foreach ($this->getJS() as $file) echo "<script src='$file' type='text/javascript'></script>"; ?>
 </head>
 <body>
     <div>

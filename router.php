@@ -13,9 +13,13 @@ function __autoload($class) {
 /* REDEFINE THESE VARIABLES FOR YOUR PROJECT! */
 define('ROOT', dirname(__FILE__));
 define('DEVELOPER', true);
-define('SERVICE_DOMAIN', ""); //The site domain
-define('APPLICATION_NAME', ""); //Application name to be used in various libraries
-define('APPLICATION_FOLDER', ""); //Start folder. Use this if you are working locally without Virtual Hosts setup, else leave empty!
+define('SERVICE_DOMAIN', ""); //The site domain to be used in various libraries
+define('APPLICATION_NAME', "FRAMEWORK"); //Application name to be used in various libraries
+
+define('APPLICATION_FOLDER', ""); //Start folder. Use this if no Virtual Hosts are setup, else leave empty!
+define('CSS_FOLDER' , APPLICATION_FOLDER . "/views/css/");
+define('IMG_FOLDER' , APPLICATION_FOLDER . "/views/images/");
+define('JS_FOLDER' , APPLICATION_FOLDER . "/views/js/");
 
 
 //Set error reporting mode for debugging
