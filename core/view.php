@@ -7,6 +7,8 @@ class View{
     private $css = array();
     private $js = array();
     private $title;
+    private $description;
+    private $ogTags;
 
     /**
      * Render the View from the given template!
@@ -107,6 +109,22 @@ class View{
      */
     public function getTitle() {
         return $this->title;
+    }
+
+    public function setDescription($desc){
+        $this->description = $desc;
+    }
+
+    public function getDescription(){
+        return $this->description;
+    }
+
+    public function setOGTags($tags){
+        $this->ogTags = $tags;
+    }
+
+    public function getOGTags(){
+        return $this->ogTags;
     }
 
     /**
