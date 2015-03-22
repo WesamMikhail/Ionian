@@ -1,7 +1,10 @@
 <?php
-namespace Ionian\Application;
+namespace Ionian\App;
 
 use \PDO;
+use Ionian\Client\Request;
+use Ionian\Errors\ErrorHandler_inter;
+use Ionian\Errors\ErrorHandler;
 
 Abstract Class App{
     const APP_MODE_DEV = 0;
@@ -29,7 +32,7 @@ Abstract Class App{
         }
     }
 
-    public function setErrorHandler(ErrorHandler $handler){
+    public function setErrorHandler(ErrorHandler_inter $handler){
         $this->errorHandler = $handler;
     }
 

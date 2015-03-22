@@ -1,5 +1,7 @@
 <?php
-namespace Ionian\Application;
+namespace Ionian\Core;
+
+use Ionian\App\App;
 
 abstract class Controller{
     protected $app;

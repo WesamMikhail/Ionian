@@ -1,5 +1,5 @@
 <?php
-namespace Libraries;
+namespace Utils;
 
 class Encryption{
     /**
@@ -21,23 +21,23 @@ class Encryption{
     }
     
     /**
-     * Bcrypt Blowfish hasing using crypt (PHP 5.3+)
+     * Blowfish hasing using crypt (PHP 5.3.7+)
      *
      * @param string $string String to hash
-     * @param int $cost Cost should be between 4 and 31. If not, Cost will be assigned to 8
-     * @return type
+     * @param int $cost Cost should be between 4 and 31. If not, Cost will be assigned to 9
+     * @return String
      */
-    public static function generateBcryptHash($string, $cost) {
+    public static function generateBlowfishHash($string, $cost) {
         if ($cost < 4 || $cost > 31 || !is_numeric($cost)) {
-            $cost = '08';
+            $cost = '09';
         }
-        else {
-            if (strlen($cost) == 1)
-                $cost = '0' . $cost;
+
+        if (strlen($cost) == 1){
+            $cost = '0' . $cost;
         }
 
         //$2a$ means Blowfish, $cost is set to modify encryption duration and randon string for salt
-        $salt = '$2a$' . $cost . '$' . self::generateRandomAlphaNumericString(22);
+        $salt = '$2y$' . $cost . '$' . self::generateRandomAlphaNumericString(22);
         return crypt($string, $salt);
     }
 }

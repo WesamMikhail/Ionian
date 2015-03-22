@@ -1,5 +1,7 @@
 <?php
-namespace Libraries;
+namespace Utils;
+
+use \SimpleXMLElement;
 
 Class XML {
     /**

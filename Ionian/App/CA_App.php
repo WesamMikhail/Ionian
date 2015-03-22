@@ -1,9 +1,10 @@
 <?php
-namespace Ionian\Application;
+namespace Ionian\App;
 
 use \ReflectionMethod;
 
 class CA_App extends App {
+
     public function run(array $settings = array()) {
         $resource = $this->request->getResource();
 

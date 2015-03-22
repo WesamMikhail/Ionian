@@ -1,7 +1,7 @@
 <?php
-namespace Ionian\Application;
+namespace Ionian\Errors;
 
-class ErrorHandler{
+class ErrorHandler implements ErrorHandler_inter{
     public function badRequest(){
         echo "400 bad request. Most likely due to missing parameters or malformed URL";
     }

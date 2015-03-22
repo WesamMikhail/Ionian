@@ -1,5 +1,5 @@
 <?php
-namespace Libraries;
+namespace Utils;
 
 class Validator{
     /**
@@ -25,14 +25,13 @@ class Validator{
 
         foreach ($args as $item) {
 
-            if (is_array($item)) {
-                if (empty($item))
-                    return false;
+            if (is_array($item) && empty($item)) {
+                return false;
             }
             else {
                 $item = trim($item);
                 if (empty($item) && $item !== "0") //0 as string is allowed, a field can be zero as string
-                return false;
+                    return false;
             }
         }
 
