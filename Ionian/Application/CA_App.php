@@ -17,7 +17,9 @@ class CA_App extends App {
                 $funcArgs = $classMethod->getNumberOfRequiredParameters();
 
                 if($funcArgs == count($params)){
-                    echo "yaozaa!";
+                    $obj = new $controller($this);
+                    call_user_func_array(array($obj, $action), $params);
+
                     return true;
                 }
                 else{$this->errorHandler->badRequest();}

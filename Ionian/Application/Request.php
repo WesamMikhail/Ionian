@@ -20,7 +20,7 @@ class Request {
         $this->setRemoteIP($_SERVER["REMOTE_ADDR"]);
         $this->setScriptName($_SERVER["SCRIPT_NAME"]);
         $this->setRequestTime($_SERVER["REQUEST_TIME"]);
-        $this->setQuery(isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '');
+        $this->setQuery(isset($_SERVER['QUERY_STRING']) ? $_GET : '');
         $this->setHost($_SERVER["HTTP_HOST"]);
         $this->setUserAgent($_SERVER["HTTP_USER_AGENT"]);
         $this->setScheme($_SERVER["REQUEST_SCHEME"]);

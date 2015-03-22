@@ -37,5 +37,21 @@ Abstract Class App{
         $this->db = new PDO($driver . ":host=" . $host . ";dbname=" . $db, $user, $password, $options);
     }
 
+    public function getDB(){
+        return $this->db;
+    }
+
+    public function getAppName(){
+        return $this->appName;
+    }
+
+    public function getErrorHandler(){
+        return $this->errorHandler;
+    }
+
+    public function getRequest(){
+        return $this->request;
+    }
+
     abstract public function run(array $settings = array());
 }
