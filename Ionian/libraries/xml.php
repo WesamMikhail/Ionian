@@ -1,5 +1,5 @@
 <?php
-namespace Core;
+namespace Libraries;
 
 Class XML {
     /**

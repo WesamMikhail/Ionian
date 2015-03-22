@@ -1,5 +1,5 @@
 <?php
-namespace Libraries\Helpers;
+namespace Libraries;
 
 class Validator{
     /**
