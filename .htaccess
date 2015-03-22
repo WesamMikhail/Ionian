@@ -1,9 +1,6 @@
-DirectoryIndex router.php
-Options -Indexes
-
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteRule ^(.*)$ router.php [PT,L]
+RewriteRule ^(.*)$ index.php [PT,L]

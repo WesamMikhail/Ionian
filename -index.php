@@ -1,14 +1,12 @@
 <?php
-//TODO make different routing classes.
-//First class can be /controller/action based
-//Second class can be /resource/ID
-//Third class...
 
 /* AUTOLOADER */
+/*
 function __autoload($class) {
     $class = str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
     require_once $class;
 }
+*/
 
 /* REDEFINE THESE VARIABLES FOR YOUR PROJECT! */
 define('ROOT', dirname(__FILE__));
