@@ -6,7 +6,18 @@ use \ReflectionMethod;
 class CA_App extends App {
 
     public function run(array $settings = array()) {
-        $resource = $this->request->getResource();
+        $uri = explode("?", $_SERVER["REQUEST_URI"]);
+
+        $uri = explode("/", rtrim($uri[0], "/"));
+        $script = explode("/", $_SERVER["SCRIPT_NAME"]);
+
+        for($i= 0;$i < sizeof($script);$i++){
+            if ((isset($uri[$i])) && ($uri[$i] == $script[$i]))
+                unset($uri[$i]);
+        }
+
+        $resource = array_values($uri);
+        $resource = (empty($resource)) ? "/" : $resource;
 
         if(count($resource) >= 2){
             $controller = '\\Project\\Controllers\\'. ucfirst($resource[0]) . "Controller";

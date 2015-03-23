@@ -2,7 +2,6 @@
 namespace Ionian\App;
 
 use \PDO;
-use Ionian\Client\Request;
 use Ionian\Errors\ErrorHandlerInterface;
 use Ionian\Errors\MainErrorHandler;
 
@@ -17,7 +16,6 @@ Abstract Class App{
 
     function __construct($name){
         $this->appName = $name;
-        $this->request = new Request;
         $this->setErrorHandler(new MainErrorHandler());
     }
 
