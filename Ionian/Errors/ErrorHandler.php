@@ -1,21 +1,9 @@
 <?php
 namespace Ionian\Errors;
 
-class ErrorHandler implements ErrorHandler_inter{
-    public function badRequest(){
-        echo "400 bad request. Most likely due to missing parameters or malformed URL";
+abstract class ErrorHandler implements ErrorHandlerInterface{
+    protected $protocol;
+    function __construct(){
+        $this->protocol = (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1');
     }
-
-    public function notFound(){
-        echo "404 not found";
-    }
-
-    public function unauthorized(){
-        echo "401 you don't have permission to access this resource";
-    }
-
-    public function unavailable(){
-        echo "503 Service unavailable. Please try again later!";
-    }
-
 }

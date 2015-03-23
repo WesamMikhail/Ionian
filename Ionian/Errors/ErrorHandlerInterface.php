@@ -1,12 +1,15 @@
 <?php
 namespace Ionian\Errors;
 
-Interface ErrorHandler_inter{
+Interface ErrorHandlerInterface{
     public function badRequest();
-
-    public function notFound();
 
     public function unauthorized();
 
+    public function notFound();
+
+    public function internalServerError();
+
     public function unavailable();
+
 }

@@ -1,23 +1,29 @@
 <?php
 namespace Project\Handlers;
 
-use Ionian\Errors\ErrorHandler_inter;
+use Ionian\Errors\ErrorHandler;
 
-class CustomErrorHandler implements ErrorHandler_inter{
+class CustomErrorHandler extends ErrorHandler{
 
-    public function badRequest() {
-        echo "Custom 400 Error";
+    public function badRequest(){
+        header($this->protocol . " 400 Bad Request.");
     }
 
-    public function notFound() {
-        echo "Custom 404 Error";
+    public function unauthorized(){
+        header($this->protocol . " 401 Unauthorized Resource.");
     }
 
-    public function unauthorized() {
-        echo "Custom 401 Error";
+    public function notFound(){
+        header($this->protocol . " 404 Page Not Found!");
+        echo "sample custom 404 override!";
     }
 
-    public function unavailable() {
-        echo "Custom 503 Error. Service unavailable. Please try again later!";
+    public function internalServerError() {
+        header($this->protocol . " 500 Internal Server Error!");
     }
+
+    public function unavailable(){
+        header($this->protocol . " 503 Service Unavailable!");
+    }
+
 }
