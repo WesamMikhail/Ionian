@@ -2,10 +2,10 @@
 namespace Project\Controllers;
 
 use Ionian\Core\Controller;
+use Ionian\Logging\Logger;
 
 class TestController extends Controller{
-    public function testAction(){
-        echo "you are in!";
-        var_dump($this->app->getDB());
+    public function testAction($value){
+        Logger::Log("Test data", "ERROR!");
     }
 }
