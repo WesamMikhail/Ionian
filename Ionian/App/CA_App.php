@@ -1,7 +1,7 @@
 <?php
 namespace Ionian\App;
 
-use \ReflectionMethod;
+use ReflectionMethod;
 
 class CA_App extends App {
 

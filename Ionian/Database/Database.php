@@ -4,7 +4,7 @@
  */
 namespace Ionian\Database;
 
-use \PDO;
+use PDO;
 
 Class Database Extends PDO{
     protected static $instances = array();
