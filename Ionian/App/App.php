@@ -1,18 +1,16 @@
 <?php
 namespace Ionian\App;
 
-use \PDO;
 use Ionian\Errors\ErrorHandlerInterface;
 use Ionian\Errors\MainErrorHandler;
+use Ionian\Database\Database;
 
 Abstract Class App{
     const APP_MODE_DEV = 0;
     const APP_MODE_PROD = 1;
 
     protected $appName;
-    protected $request;
     protected $errorHandler;
-    protected $db;
 
     function __construct($name){
         $this->appName = $name;
@@ -34,12 +32,8 @@ Abstract Class App{
         $this->errorHandler = $handler;
     }
 
-    public function initPDO($driver, $host, $db, $user, $password, $options = null){
-        $this->db = new PDO($driver . ":host=" . $host . ";dbname=" . $db, $user, $password, $options);
-    }
-
-    public function getDB(){
-        return $this->db;
+    public function initDatabase($driver, $host, $db, $user, $password, array $options = []){
+        Database::create("DEFAULT", [$driver, $host, $db, $user, $password, $options]);
     }
 
     public function getAppName(){
@@ -48,10 +42,6 @@ Abstract Class App{
 
     public function getErrorHandler(){
         return $this->errorHandler;
-    }
-
-    public function getRequest(){
-        return $this->request;
     }
 
     abstract public function run(array $settings = array());

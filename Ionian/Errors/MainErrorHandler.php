@@ -26,8 +26,7 @@ class MainErrorHandler extends ErrorHandler{
         echo $this->template(503, "Service Unavailable. Please try again later!");
     }
 
-
-    private function template($code, $error){
+    protected function template($code, $error){
         $tmp = '<!DOCTYPE HTML>
                 <html>
                 <head>
