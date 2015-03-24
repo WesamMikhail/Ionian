@@ -1,4 +1,7 @@
 <?php
+/**
+ * This class Implements The Multiton Design Pattern (http://en.wikipedia.org/wiki/Multiton_pattern)
+ */
 namespace Ionian\Database;
 
 use \PDO;

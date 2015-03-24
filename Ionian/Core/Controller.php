@@ -1,12 +1,13 @@
 <?php
 namespace Ionian\Core;
 
-use Ionian\App\App;
+use Ionian\Errors\ErrorHandlerInterface;
 
 abstract class Controller{
-    protected $app;
+    protected $appName;
 
-    function __construct(App $app){
-        $this->app = $app;
+    function __construct($appName, ErrorHandlerInterface $errorhandler){
+        $this->appName = $appName;
+        $this->errorHandler = $errorhandler;
     }
 }

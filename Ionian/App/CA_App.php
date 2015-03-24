@@ -29,7 +29,7 @@ class CA_App extends App {
                 $funcArgs = $classMethod->getNumberOfRequiredParameters();
 
                 if($funcArgs == count($params)){
-                    $obj = new $controller($this);
+                    $obj = new $controller($this->getAppName(), $this->getErrorHandler());
                     call_user_func_array(array($obj, $action), $params);
 
                     return true;
