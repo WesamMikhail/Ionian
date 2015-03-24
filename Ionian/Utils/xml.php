@@ -1,7 +1,7 @@
 <?php
-namespace Utils;
+namespace Ionian\Utils;
 
-use \SimpleXMLElement;
+use SimpleXMLElement;
 
 Class XML {
     /**

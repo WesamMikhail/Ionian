@@ -35,4 +35,10 @@ class TestController extends Controller{
             ->thumbnail($size, $mode)
             ->save(ROOT . "/Project/Views/Images/logoThumb.png");
     }
+
+    public function test3Action(){
+        $db = Database::get()->prepare("SELECT * FROM testtable");
+        $db->execute();
+        var_dump($db->fetchAll());
+    }
 }

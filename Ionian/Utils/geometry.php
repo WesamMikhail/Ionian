@@ -1,5 +1,5 @@
 <?php
-namespace Utils;
+namespace Ionian\Utils;
 
 class Geometry {
 
