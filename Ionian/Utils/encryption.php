@@ -32,7 +32,7 @@ class Encryption{
      */
     public static function generateBlowfishHash($string, $cost) {
         if (!function_exists('crypt')) {
-            throw new Exception ("Cannot find crypt.");
+            trigger_error('Cannot find Crypt extension!', E_USER_ERROR);
         }
 
         if ($cost < 4 || $cost > 31 || !is_numeric($cost)) {

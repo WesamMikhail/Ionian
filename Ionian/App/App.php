@@ -9,11 +9,9 @@ Abstract Class App{
     const APP_MODE_DEV = 0;
     const APP_MODE_PROD = 1;
 
-    protected $appName;
     protected $errorHandler;
 
-    function __construct($name){
-        $this->appName = $name;
+    function __construct(){
         $this->setErrorHandler(new MainErrorHandler());
     }
 

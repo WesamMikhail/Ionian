@@ -7,12 +7,16 @@ use Ionian\Database\Database;
 use Ionian\Logging\Logger;
 
 use CakePHP\Utility\Hash;
+use Ubench\Ubench;
 use Faker;
-use Imagine;
 
-class TestController extends Controller{
-    public function testAction($value){
+class TestController extends Controller {
+    public function testAction($value) {
+        $bench = new Ubench;
+        $bench->start();
+
         //Logger::Log("Test Log" , "Message!");
+
         $faker = Faker\Factory::create();
 
         $things = [
@@ -25,20 +29,16 @@ class TestController extends Controller{
 
         $view = new View("IndexView.php", $names);
         $view->render();
+
+        $bench->end();
+
+        echo "Script took " . $bench->getTime() . " To execute!";
     }
 
-    public function test2Action(){
-        $imagine = new Imagine\Gd\Imagine();
-        $size    = new Imagine\Image\Box(40, 40);
-        $mode    = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
-        $imagine->open(ROOT . "/Project/Views/Images/logo.png")
-            ->thumbnail($size, $mode)
-            ->save(ROOT . "/Project/Views/Images/logoThumb.png");
-    }
-
-    public function test3Action(){
+    public function test3Action() {
         $db = Database::get()->prepare("SELECT * FROM testtable");
         $db->execute();
         var_dump($db->fetchAll());
     }
+
 }
