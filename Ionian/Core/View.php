@@ -19,7 +19,7 @@ class View{
      * getView requires the view file. If the file is not found, E_NOTICE will be issued!
      */
     protected function getView($view){
-        $view = getcwd() . "/Project/Views/" . $view;
+        $view = ROOT. "/Project/Views/" . $view;
         if(!is_readable($view)){
             trigger_error("VIEW COULD NOT BE FOUND!");
         }

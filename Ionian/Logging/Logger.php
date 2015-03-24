@@ -7,7 +7,7 @@ Class Logger implements FileLoggerInterface{
             //Use *nix based separator because windows is OK with that!
             $fileName = "/Project/Logs/main.log";
 
-        $fileName = getcwd() . $fileName;
+        $fileName = ROOT . $fileName;
         $dir = dirname($fileName);
 
         if(!is_readable($dir)){

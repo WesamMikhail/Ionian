@@ -11,7 +11,7 @@
  * @since         2.2.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Ionian\Libraries\CakePHP\Utility;
+namespace CakePHP\Utility;
 /**
  * Library of array functions for manipulating and extracting data
  * from arrays or 'sets' of data.

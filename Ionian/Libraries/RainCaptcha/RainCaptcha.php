@@ -1,5 +1,5 @@
 <?php
-namespace Ionian\Libraries\RainCaptcha;
+namespace RainCaptcha;
 
 /**
  * RainCaptcha PHP Wrapper v1.1.0
