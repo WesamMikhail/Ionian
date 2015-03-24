@@ -1,6 +1,8 @@
 <?php
 namespace Utils;
 
+use Exception;
+
 class Encryption{
     /**
      * Generate a random string with repeatable letters.
@@ -19,15 +21,20 @@ class Encryption{
 
         return implode('', $randomChars);
     }
-    
+
     /**
      * Blowfish hasing using crypt (PHP 5.3.7+)
      *
      * @param string $string String to hash
      * @param int $cost Cost should be between 4 and 31. If not, Cost will be assigned to 9
+     * @throws Exception if Crypt is not installed!
      * @return String
      */
     public static function generateBlowfishHash($string, $cost) {
+        if (!function_exists('crypt')) {
+            throw new Exception ("Cannot find crypt.");
+        }
+
         if ($cost < 4 || $cost > 31 || !is_numeric($cost)) {
             $cost = '09';
         }

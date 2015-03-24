@@ -72,15 +72,10 @@ class Explorer {
      * Get file extension from the filename
      * 
      * @param string $filename
-     * @return string/boolean Extension if exists or False if not
+     * @return string file extension
      */
     public static function getFileExtension($filename) {
-        $i = strrpos($filename, ".");
-
-        if (!$i)
-            return false;
-
-        return strtolower(substr($filename, $i + 1, strlen($filename) - $i));
+        return pathinfo($filename, PATHINFO_EXTENSION);
     }
 
 }
