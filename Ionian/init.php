@@ -3,6 +3,8 @@
 namespace Ionian;
 
 define("ROOT", dirname(__DIR__));
+define("PROJECT", ROOT . "/Project");
+
 
 if(!defined("DIRECTORY_SEPARATOR ")){
     PHP_OS == "Windows" || PHP_OS == "WINNT" ? define("DIRECTORY_SEPARATOR ", "\\") : define("DIRECTORY_SEPARATOR ", "/");

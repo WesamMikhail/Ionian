@@ -3,21 +3,10 @@ namespace Ionian\App;
 
 use ReflectionMethod;
 
-class CA_App extends App {
+class Rapid extends App {
 
-    public function run(array $settings = array()) {
-        $uri = explode("?", $_SERVER["REQUEST_URI"]);
-
-        $uri = explode("/", rtrim($uri[0], "/"));
-        $script = explode("/", $_SERVER["SCRIPT_NAME"]);
-
-        for($i= 0;$i < sizeof($script);$i++){
-            if ((isset($uri[$i])) && ($uri[$i] == $script[$i]))
-                unset($uri[$i]);
-        }
-
-        $resource = array_values($uri);
-        $resource = (empty($resource)) ? "/" : $resource;
+    public function run() {
+        $resource = $this->getRequestedRoute();
 
         if(count($resource) >= 2){
             $controller = '\\Project\\Controllers\\'. ucfirst($resource[0]) . "Controller";
@@ -26,9 +15,11 @@ class CA_App extends App {
 
             if(method_exists($controller, $action)){
                 $classMethod = new ReflectionMethod($controller, $action);
-                $funcArgs = $classMethod->getNumberOfRequiredParameters();
+                $requiredArgs = $classMethod->getNumberOfRequiredParameters();
+                $totalArgs = $classMethod->getNumberOfParameters();
+                $suppliedArgs = count($params);
 
-                if($funcArgs == count($params)){
+                if(($suppliedArgs >= $requiredArgs) && ($suppliedArgs <= $totalArgs)){
                     $obj = new $controller($this->getErrorHandler());
                     call_user_func_array(array($obj, $action), $params);
 

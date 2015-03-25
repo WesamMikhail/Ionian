@@ -42,5 +42,20 @@ Abstract Class App{
         return $this->errorHandler;
     }
 
-    abstract public function run(array $settings = array());
+    protected function getRequestedRoute(){
+        $uri = explode("?", $_SERVER["REQUEST_URI"]);
+
+        $uri = explode("/", rtrim($uri[0], "/"));
+        $script = explode("/", $_SERVER["SCRIPT_NAME"]);
+
+        for($i= 0;$i < sizeof($script);$i++){
+            if ((isset($uri[$i])) && ($uri[$i] == $script[$i]))
+                unset($uri[$i]);
+        }
+
+        $resource = array_values($uri);
+        return (empty($resource)) ? "/" : $resource;
+    }
+
+    abstract public function run();
 }
