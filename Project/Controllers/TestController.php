@@ -9,15 +9,15 @@ class TestController extends Controller{
     }
 
     public function test2Action($required){
-        echo "test required1";
+        echo "required $required";
     }
 
-    public function test3Action($required, $optional = ''){
-        echo "test required1 optional1";
+    public function test3Action($required, $optional = 'DEFAULT'){
+        echo "test $required $optional";
     }
 
     public function test4Action($required, $required2){
-        echo "test required required";
+        echo "test $required $required2";
     }
 
 }

@@ -4,7 +4,6 @@ namespace Ionian\App;
 use ReflectionMethod;
 
 class Rapid extends App {
-
     public function run() {
         $resource = $this->getRequestedRoute();
 
@@ -32,7 +31,5 @@ class Rapid extends App {
 
         }
         else{$this->errorHandler->badRequest();}
-
-        return false;
     }
 }

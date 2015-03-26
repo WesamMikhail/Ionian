@@ -32,11 +32,10 @@ class Defined extends App {
         $this->addRoute(self::METHOD_DELETE, $uri, $target, $preq);
     }
 
-    //TODO fix trigger_error messages!
     public function multi(array $methods, $uri, $target, $preq = null) {
         foreach ($methods as $method) {
             if (!in_array($method, [self::METHOD_GET, self::METHOD_DELETE, self::METHOD_POST, self::METHOD_PUT])) {
-                trigger_error("Method not applicable. Please only use GET, PUT, POST or DELETE in multiRoute([],...)", E_USER_ERROR);
+                trigger_error("Method ($method) not applicable. Please only use GET, PUT, POST or DELETE in multiRoute([],...)", E_USER_ERROR);
             }
 
             $this->addRoute($method, $uri, $target, $preq);
@@ -48,7 +47,7 @@ class Defined extends App {
     protected function addRoute($method, $uri, $target, $preq = null) {
 
         if (!is_string($target) || !is_string($uri)) {
-            trigger_error("URI and TARGET parameters must both be strings!", E_USER_ERROR);
+            trigger_error("Route URI and TARGET parameters must both be strings!", E_USER_ERROR);
         }
 
         //Clean URI
