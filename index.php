@@ -1,9 +1,8 @@
 <?php
-require "Ionian/init.php";
+require_once "Ionian/init.php";
 
-use \Ionian\App;
+use Ionian\App;
 
-/*
 //Create an Application
 $app = new App\Rapid();
 
@@ -18,8 +17,8 @@ $app->initDatabase("mysql", "127.0.0.1", "test", "root", "", [PDO::ATTR_DEFAULT_
 
 //Run the application
 $app->run();
-*/
 
+/*
 $app = new App\Defined();
 $app->setAppMode(App\App::APP_MODE_DEV);
 $app->initDatabase("mysql", "127.0.0.1", "test", "root", "", [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_EMULATE_PREPARES => false]);
@@ -29,3 +28,4 @@ $app->get('/test3', "TestController@test3Action");
 $app->get('/test4', "TestController@test4Action");
 $app->get('/test5', "TestController@test5Action");
 $app->run();
+*/
