@@ -12,4 +12,5 @@ Interface ErrorHandlerInterface{
 
     public function unavailable();
 
+    public function customError($code, $error, $msg);
 }

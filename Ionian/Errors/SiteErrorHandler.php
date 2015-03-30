@@ -1,7 +1,7 @@
 <?php
 namespace Ionian\Errors;
 
-class MainErrorHandler extends ErrorHandler{
+class SiteErrorHandler extends ErrorHandler{
     public function badRequest(){
         header($this->protocol . " 400 Bad Request.");
         echo $this->template(400, "Bad Request. Parameter missing or malformed URL");
@@ -24,6 +24,11 @@ class MainErrorHandler extends ErrorHandler{
     public function unavailable(){
         header($this->protocol . " 503 Service Unavailable!");
         echo $this->template(503, "Service Unavailable. Please try again later!");
+    }
+
+    public function customError($code, $error, $msg) {
+        header($this->protocol . " $code $error");
+        echo $this->template($code, $msg);
     }
 
     protected function template($code, $error){

@@ -2,27 +2,41 @@
 namespace Ionian\App;
 
 use Ionian\Errors\ErrorHandlerInterface;
-use Ionian\Errors\MainErrorHandler;
+use Ionian\Errors\APIErrorHandler;
+use Ionian\Errors\SiteErrorHandler;
+
 use Ionian\Database\Database;
 
 Abstract Class App{
     const APP_MODE_DEV = 0;
     const APP_MODE_PROD = 1;
 
+    const APP_TYPE_API = 1;
+    const APP_TYPE_SITE = 2;
+
     protected $errorHandler;
 
-    function __construct(){
-        $this->setErrorHandler(new MainErrorHandler());
+    function __construct($type){
+        $this->setAppType($type);
     }
 
     public function setAppMode($mode){
-        if($mode == self::APP_MODE_DEV){
+        if($mode === self::APP_MODE_DEV){
             ini_set('error_reporting', E_ALL);
             ini_set('display_errors', '1');
         }
-        else if($mode == self::APP_MODE_PROD){
+        else if($mode === self::APP_MODE_PROD){
             ini_set('error_reporting', 0);
             ini_set('display_errors', '0');
+        }
+    }
+
+    public function setAppType($type){
+        if($type === self::APP_TYPE_API){
+            $this->setErrorHandler(new APIErrorHandler());
+        }
+        else if($type == self::APP_TYPE_SITE){
+            $this->setErrorHandler(new SiteErrorHandler());
         }
     }
 
@@ -32,10 +46,6 @@ Abstract Class App{
 
     public function initDatabase($driver, $host, $db, $user, $password, array $options = []){
         Database::create("DEFAULT", [$driver, $host, $db, $user, $password, $options]);
-    }
-
-    public function getAppName(){
-        return $this->appName;
     }
 
     public function getErrorHandler(){
