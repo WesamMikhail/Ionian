@@ -59,7 +59,7 @@ Abstract Class App{
         $script = explode("/", $_SERVER["SCRIPT_NAME"]);
 
         for($i= 0;$i < sizeof($script);$i++){
-            if ((isset($uri[$i])) && ($uri[$i] == $script[$i]))
+            if ((isset($uri[$i])) && (strtolower($uri[$i]) == strtolower($script[$i])))
                 unset($uri[$i]);
         }
 
