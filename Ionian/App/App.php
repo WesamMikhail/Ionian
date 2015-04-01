@@ -64,6 +64,13 @@ Abstract Class App{
         }
 
         $resource = array_values($uri);
+        foreach($resource as $resourceItem){
+            //If one of the URI fields is empty, we refuse to accept the request!
+            if($resourceItem == ""){
+                $this->errorHandler->badRequest();
+                die();
+            }
+        }
         return (empty($resource)) ? "/" : $resource;
     }
 
