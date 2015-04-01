@@ -2,7 +2,7 @@
 namespace Ionian\Core;
 
 class APIDump{
-    public static function output($code, $response, $data = null){
+    public static function output($code, $response = "NO MSG PROVIDED!", $data = null){
         header('Content-Type: application/json');
         $dump = ["code" => $code, "response" => $response];
         if(!is_null($data))

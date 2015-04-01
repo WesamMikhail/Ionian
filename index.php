@@ -4,7 +4,7 @@ require_once "Ionian/init.php";
 use Ionian\App;
 
 //Create an Application
-$app = new App\Rapid();
+$app = new App\Rapid(App\App::APP_TYPE_SITE);
 
 //Set the error mode to DEV. Change this before you deploy!
 $app->setAppMode(App\App::APP_MODE_DEV);
@@ -19,13 +19,9 @@ $app->initDatabase("mysql", "127.0.0.1", "test", "root", "", [PDO::ATTR_DEFAULT_
 $app->run();
 
 /*
-$app = new App\Defined();
+$app = new App\Defined(App\App::APP_TYPE_SITE);
 $app->setAppMode(App\App::APP_MODE_DEV);
 $app->initDatabase("mysql", "127.0.0.1", "test", "root", "", [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_EMULATE_PREPARES => false]);
-$app->get('/test1', "TestController@testAction");
-$app->get('/test2', "TestController@test2Action");
-$app->get('/test3', "TestController@test3Action");
-$app->get('/test4', "TestController@test4Action");
-$app->get('/test5', "TestController@test5Action");
+$app->get('/test1', "DependencySampleController@test3Action");
 $app->run();
 */
