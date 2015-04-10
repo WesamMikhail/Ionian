@@ -32,6 +32,12 @@ class APIErrorHandler extends ErrorHandler {
         print_r($this->template(503, "Service Unavailable. Please try again later!"));
     }
 
+    public function conflict(){
+        header($this->protocol . " 409 Conflict!");
+        header('Content-Type: application/json');
+        print_r($this->template(409, "Conflict. You are trying to access a resource that is already in use by someone else!"));
+    }
+
     public function customError($code, $error, $msg) {
         header('Content-Type: application/json');
         header($this->protocol . " $code $error");
