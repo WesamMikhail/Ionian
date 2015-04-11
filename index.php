@@ -2,7 +2,7 @@
 require_once "Ionian/init.php";
 
 use Ionian\App;
-/*
+
 //Create an Application
 $app = new App\Rapid(App\App::APP_TYPE_SITE);
 
@@ -18,9 +18,9 @@ $app->initDatabase("mysql", "127.0.0.1", "test", "root", "", [PDO::ATTR_DEFAULT_
 //Run the application
 $app->run();
 
-*/
 
 
+/*
 //Create an Application
 $app = new App\Rapid(App\App::APP_TYPE_API);
 
@@ -32,7 +32,7 @@ $app->initDatabase("mysql", "127.0.0.1", "test", "root", "", [PDO::ATTR_DEFAULT_
 
 //Run the application
 $app->run();
-
+*/
 
 
 /*
