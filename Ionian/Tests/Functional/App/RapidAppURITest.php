@@ -2,7 +2,7 @@
 
 use GuzzleHttp\Client;
 
-class RapidAppTest extends PHPUnit_Framework_TestCase{
+class RapidAppURITest extends PHPUnit_Framework_TestCase{
     protected $client;
 
     protected function setUp(){
