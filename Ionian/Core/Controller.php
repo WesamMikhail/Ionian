@@ -10,9 +10,9 @@ abstract class Controller{
         $this->errorHandler = $errorHandler;
     }
 
-    public function outputJSON($code, $response = "NO MSG PROVIDED!", $data = null){
+    public function outputJSON($response = "NO MSG PROVIDED!", $data = null){
         header('Content-Type: application/json');
-        $dump = ["code" => $code, "response" => $response];
+        $dump = ["code" => 200, "response" => $response];
         if(!is_null($data))
             $dump["data"] = $data;
 

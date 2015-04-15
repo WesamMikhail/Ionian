@@ -1,7 +1,6 @@
 <?php
 namespace Project\Controllers;
 
-use Ionian\Core\APIDump;
 use Ionian\Core\Controller;
 
 class ApiSampleController extends Controller {
@@ -20,20 +19,20 @@ class ApiSampleController extends Controller {
 
         $value = 123;
 
-        $this->outputJSON(200, "$value was found!");
+        $this->outputJSON("$value was found!");
     }
 
     public function parameterAction($param) {
-        $this->outputJSON(200, "PARAMETER WAS SUPPLIED!", $param);
+        $this->outputJSON("PARAMETER WAS SUPPLIED!", $param);
     }
 
     public function optionalAction($param, $optional = null) {
-        $this->outputJSON(200, "Paramters supplied", [$param, $optional]);
+        $this->outputJSON("Paramters supplied", [$param, $optional]);
     }
 
     public function errorAction($param) {
         if ($param == 100) {
-            $this->outputJSON(200, "You used parameter value 200");
+            $this->outputJSON("You used parameter value 200");
         }
         else {
             $this->errorHandler->unauthorized();

@@ -30,7 +30,7 @@ class DependencySampleController extends Controller {
 
         $names = Hash::extract($things, '{n}[age>21].name');
 
-        $this->outputJSON(200, "SAMPLE MSG", $names);
+        $this->outputJSON("SAMPLE MSG", $names);
 
         $bench->end();
 
