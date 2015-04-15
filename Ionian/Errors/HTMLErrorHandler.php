@@ -1,7 +1,7 @@
 <?php
 namespace Ionian\Errors;
 
-class SiteErrorHandler extends ErrorHandler{
+class HTMLErrorHandler extends ErrorHandler{
     public function badRequest(){
         header($this->protocol . " 400 Bad Request.");
         echo $this->template(400, "Bad Request. Parameter missing or malformed URL");

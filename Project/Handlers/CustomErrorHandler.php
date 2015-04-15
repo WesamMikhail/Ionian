@@ -26,4 +26,7 @@ class CustomErrorHandler extends ErrorHandler{
         header($this->protocol . " 503 Service Unavailable!");
     }
 
+    public function customError($code, $error, $msg) {
+        // TODO: Implement customError() method.
+    }
 }

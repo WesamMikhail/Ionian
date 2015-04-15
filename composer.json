@@ -1,7 +1,6 @@
 {
     "require": {
         "fzaninotto/faker": "1.4.0",
-        "league/plates": "3.1.0",
         "respect/validation": "0.8.3",
         "devster/ubench": "1.1.1",
         "codeguy/upload": "1.3.*",

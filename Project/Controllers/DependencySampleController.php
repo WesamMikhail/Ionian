@@ -2,7 +2,6 @@
 namespace Project\Controllers;
 
 use Ionian\Core\Controller;
-use Ionian\Core\View;
 use Ionian\Database\Database;
 use Ionian\Logging\Logger;
 
@@ -31,8 +30,7 @@ class DependencySampleController extends Controller {
 
         $names = Hash::extract($things, '{n}[age>21].name');
 
-        $view = new View("IndexView.php", $names);
-        $view->render();
+        $this->outputJSON(200, "SAMPLE MSG", $names);
 
         $bench->end();
 
@@ -80,11 +78,6 @@ class DependencySampleController extends Controller {
         $value = $db->fetchColumn();
 
         var_dump(V::numeric()->validate($value));
-    }
-
-    public function test4Action($name){
-        $tpl = new Plates\Engine(PROJECT . "/Views/Templates");
-        echo $tpl->render('PlatesTemplate' , ["name" => $name]);
     }
 
 }

@@ -5,11 +5,11 @@ use Ionian\Core\APIDump;
 use Ionian\Core\Controller;
 
 class ApiSampleController extends Controller {
-    public function indexAction(){
-        APIDump::output(200, "SAMPLE INDEX API MSG");
+    public function indexAction() {
+        $this->outputJSON(200, "SAMPLE INDEX MSG");
     }
 
-    public function DBAction(){
+    public function DBAction() {
         /*
             Get something from DB using:
 
@@ -20,22 +20,22 @@ class ApiSampleController extends Controller {
 
         $value = 123;
 
-        APIDump::output(200, "$value was found!");
+        $this->outputJSON(200, "$value was found!");
     }
 
-    public function parameterAction($param){
-        APIDump::output(200, "PARAMETER WAS SUPPLIED!", $param);
+    public function parameterAction($param) {
+        $this->outputJSON(200, "PARAMETER WAS SUPPLIED!", $param);
     }
 
-    public function optionalAction($param, $optional = null){
-        APIDump::output(200, "Paramters supplied", [$param, $optional]);
+    public function optionalAction($param, $optional = null) {
+        $this->outputJSON(200, "Paramters supplied", [$param, $optional]);
     }
 
-    public function errorAction($param){
-        if($param == 100){
-            APIDump::output(200, "You used parameter value 200");
+    public function errorAction($param) {
+        if ($param == 100) {
+            $this->outputJSON(200, "You used parameter value 200");
         }
-        else{
+        else {
             $this->errorHandler->unauthorized();
         }
     }

@@ -11,13 +11,16 @@ Abstract Class App{
     const APP_MODE_DEV = 0;
     const APP_MODE_PROD = 1;
 
-    const APP_TYPE_API = 1;
-    const APP_TYPE_SITE = 2;
-
     protected $errorHandler;
 
-    function __construct($type){
-        $this->setAppType($type);
+    function __construct($appMode, ErrorHandlerInterface $errorHandler = null){
+        $this->setAppMode($appMode);
+
+        if($errorHandler === null)
+            $this->setErrorHandler(new APIErrorHandler());
+        else{
+            $this->setErrorHandler($errorHandler);
+        }
     }
 
     public function setAppMode($mode){
@@ -28,15 +31,6 @@ Abstract Class App{
         else if($mode === self::APP_MODE_PROD){
             ini_set('error_reporting', 0);
             ini_set('display_errors', '0');
-        }
-    }
-
-    public function setAppType($type){
-        if($type === self::APP_TYPE_API){
-            $this->setErrorHandler(new APIErrorHandler());
-        }
-        else if($type == self::APP_TYPE_SITE){
-            $this->setErrorHandler(new SiteErrorHandler());
         }
     }
 
