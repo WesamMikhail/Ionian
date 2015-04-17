@@ -32,7 +32,7 @@ class ApiSampleController extends Controller {
 
     public function errorAction($param) {
         if ($param == 100) {
-            $this->outputJSON("You used parameter value 200");
+            $this->outputJSON("You used parameter value 100 which is authorized!");
         }
         else {
             $this->errorHandler->unauthorized();
