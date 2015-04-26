@@ -10,7 +10,7 @@ $app = new App\Rapid(App\App::APP_MODE_DEV);
 $app->initDatabase("mysql", "127.0.0.1", "test", "root", "", [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_EMULATE_PREPARES => false]);
 
 //By default we include the framework built-in error handler. You can include your own by using this command!
-//$app->setErrorHandler(new \Project\Handlers\CustomErrorHandler());
+//$app->setErrorHandler(new \Ionian\Errors\ErrorHandlerHTML());
 
 //Run the application
 $app->run();

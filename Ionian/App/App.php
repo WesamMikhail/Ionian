@@ -2,8 +2,7 @@
 namespace Ionian\App;
 
 use Ionian\Errors\ErrorHandlerInterface;
-use Ionian\Errors\APIErrorHandler;
-use Ionian\Errors\SiteErrorHandler;
+use Ionian\Errors\ErrorHandlerJSON;
 
 use Ionian\Database\Database;
 
@@ -17,7 +16,7 @@ Abstract Class App{
         $this->setAppMode($appMode);
 
         if($errorHandler === null)
-            $this->setErrorHandler(new APIErrorHandler());
+            $this->setErrorHandler(new ErrorHandlerJSON());
         else{
             $this->setErrorHandler($errorHandler);
         }
