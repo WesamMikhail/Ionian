@@ -7,6 +7,7 @@
         "cakephp/utility": "3.0.0",
         "brandonwamboldt/utilphp": "1.0.*",
         "guzzlehttp/guzzle": "~5.0",
-        "phpunit/phpunit": "4.6.*"
+        "phpunit/phpunit": "4.6.*",
+        "league/fractal": "0.12.0"
     }
 }
