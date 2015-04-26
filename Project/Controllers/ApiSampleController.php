@@ -5,7 +5,7 @@ use Ionian\Core\Controller;
 
 class ApiSampleController extends Controller {
     public function indexAction() {
-        $this->outputJSON(200, "SAMPLE INDEX MSG");
+        $this->outputJSON("SAMPLE INDEX MSG");
     }
 
     public function DBAction() {
