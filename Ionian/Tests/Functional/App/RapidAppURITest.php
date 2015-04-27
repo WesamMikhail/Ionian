@@ -62,6 +62,9 @@ class RapidAppURITest extends PHPUnit_Framework_TestCase{
         $response = $this->client->get('/Ionian/ApiSample/parameter/123');
         $this->assertEquals(200, $response->getStatusCode());
 
+        $response = $this->client->get('/Ionian/ApiSample/parameter/asd%20asd');
+        $this->assertEquals(200, $response->getStatusCode());
+
         $response = $this->client->get('/Ionian/ApiSample/optional/11');
         $this->assertEquals(200, $response->getStatusCode());
 

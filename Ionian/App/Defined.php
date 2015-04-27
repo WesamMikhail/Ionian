@@ -89,6 +89,9 @@ class Defined extends App {
 
                 if (is_array($route)) {
                     $params = array_slice($uri, $uriCount - $i, $uriCount - 1);
+                    foreach($params as &$param){
+                        $param = urldecode($param);
+                    }
                     break;
                 }
             }
