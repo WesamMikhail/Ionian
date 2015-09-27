@@ -27,6 +27,8 @@ abstract Class App{
         $this->mode = $mode;
 
         if($mode === App::APP_MODE_PROD) {
+            error_reporting(0);
+
             set_exception_handler(function(\Exception $e){
                 $status = "Unknown!";
                 if($e instanceof HTTPException){
@@ -40,6 +42,14 @@ abstract Class App{
 
             set_error_handler(function ($errno, $errstr, $errfile, $errline) {
                 throw new HTTPException_500;
+            });
+
+            register_shutdown_function(function(){
+                $error = error_get_last();
+
+                if( $error !== NULL) {
+                    ExceptionHandler::handleJSON(500, "Internal Server Error", "Unexpected Error.");
+                }
             });
         }
     }
