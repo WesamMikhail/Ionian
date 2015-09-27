@@ -1,0 +1,14 @@
+{
+  "authors": [
+    {
+    "name": "Wesam Mikhail",
+    "email": "wesam@lorenum.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Ionian\\": "Ionian/",
+      "Project\\": "Project/"
+    }
+  }
+}

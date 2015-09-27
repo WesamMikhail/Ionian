@@ -1,0 +1,7 @@
+#TODO fix http://URL/C/A/%20 leads to standard 403 instead of our 403
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(.*)$ index.php [PT,L]
