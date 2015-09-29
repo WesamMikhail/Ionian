@@ -90,7 +90,7 @@ abstract Class App{
                 throw new HTTPException_400;
             }
         }
-        return (empty($resource)) ? "/" : $resource;
+        return (empty($resource)) ? ["/"] : $resource;
     }
 
     abstract public function run();
