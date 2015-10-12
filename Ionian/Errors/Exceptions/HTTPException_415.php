@@ -7,7 +7,7 @@ namespace Ionian\Errors\Exceptions;
  * For example, the client uploads an image as image/svg+xml, but the server requires that images use a different format.
  */
 Class HTTPException_415 extends HTTPException{
-    public function __construct($message = 'Unexpected media type.') {
+    public function __construct($message = 'Unexpected Content-Type header.') {
         parent::__construct("Unsupported Media Type", 415, $message);
     }
 }
