@@ -1,28 +1,53 @@
 <?php
-/**
- * This class Implements The Multiton Design Pattern (http://en.wikipedia.org/wiki/Multiton_pattern)
- */
 namespace Ionian\Database;
 
 use PDO;
+use Exception;
+use Ionian\Utils\Explorer;
 
-Class Database Extends PDO{
-    protected static $instances = array();
+Class Database{
+    /**
+     * @param $driver
+     * @param $host
+     * @param $db
+     * @param $user
+     * @param $password
+     * @param array $options
+     * @return PDO
+     */
+    public static function create($driver, $host, $db, $user, $password, array $options = []){
+        $db = new PDO("$driver:dbname=$db;host=$host", $user, $password);
 
-    public static function get($id = "DEFAULT", array $settings = null){
-        if(isset(self::$instances[$id]))
-            return self::$instances[$id];
+        if(!empty($options)){
+            foreach($options as $key => $val){
+                $db->setAttribute($key, $val);
+            }
+        }
 
-        return self::create($id, $settings);
+        return $db;
     }
 
-    public static function create($id, array $settings){
-        if((count($settings) == 5) || ($settings[5] === null))
-            $settings[5] = array(); //If no options given, we pass empty options array at object creation below!
+    /**
+     * @param $file
+     * @param array $options
+     * @return PDO
+     * @throws Exception
+     */
+    public static function createFromINI($file, $options = []){
+        if(Explorer::getFileExtension($file) != "ini")
+            throw new Exception("Settings file is not of extension 'ini'.");
 
-        $instance = new Database($settings[0] .":host=". $settings[1] . ";dbname=" . $settings[2] . ";charset=utf8", $settings[3], $settings[4], $settings[5]);
-        self::$instances[$id] = $instance;
+        $settings = parse_ini_file($file, true);
 
-        return $instance;
+        if(!isset($settings["Database"]))
+            throw new Exception("[Database] section is not found in $file");
+
+        $db = $settings["Database"];
+
+        if(!isset($db["db"], $db["host"], $db["database"], $db["user"], $db["password"]))
+            throw new Exception("The following keys are required 'db, host, database, user, password' under the [Database] section.");
+
+        return self::create($db["db"], $db["host"], $db["database"], $db["user"], $db["password"], $options);
     }
+
 }
