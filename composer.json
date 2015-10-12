@@ -1,8 +1,9 @@
 {
   "authors": [
     {
-    "name": "Wesam Mikhail",
-    "email": "wesam@lorenum.com"
+      "name": "Wesam Mikhail",
+      "email": "wesam@lorenum.com",
+      "homepage" : "https://github.com/WesamMikhail"
     }
   ],
   "autoload": {
@@ -10,5 +11,18 @@
       "Ionian\\": "Ionian/",
       "Project\\": "Project/"
     }
+  },
+  "repositories": [
+    {
+      "url": "https://github.com/WesamMikhail/SimpleRouter.git",
+      "type": "git"
+    }
+  ],
+  "require": {
+    "Lorenum/SimpleRouter": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.8.*",
+    "guzzlehttp/guzzle": "~5.0"
   }
 }
