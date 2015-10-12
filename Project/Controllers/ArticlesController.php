@@ -48,6 +48,8 @@ class ArticlesController extends Controller{
      * @throws HTTPException_500
      */
     public function deleteAction($topicID, $articleID){
+        //We could use the $topicID to make some restrictions her eif we wanted to!
+
         $stm = $this->db->prepare("DELETE FROM articles WHERE id = :id");
         $res = $stm->execute([":id" => $articleID]);
 
@@ -63,6 +65,8 @@ class ArticlesController extends Controller{
      * @param $topicID
      */
     public function listAction($topicID){
+        //Listing the topics actually requires nothing more than this.
+
         $stm = $this->db->prepare("SELECT * FROM articles WHERE parent_id = :topicID");
         $stm->execute([":topicID" => $topicID]);
         self::outputJSON("Successful Listing.", $stm->fetchAll());
@@ -75,6 +79,8 @@ class ArticlesController extends Controller{
      * @throws HTTPException_404
      */
     public function getAction($topicID, $articleID){
+        //If the topic is not found then the article is not going to be found either, so we could sanity check for that as well!
+
         $stm = $this->db->prepare("SELECT * FROM articles WHERE id = :id");
         $stm->execute([":id" => $articleID]);
 
