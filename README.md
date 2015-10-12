@@ -2,16 +2,19 @@
 
 Ionian is a framework that was born out of frustration with almost all current frameworks out there.
 
-The idea here is that a framework should not be anything more than a router + a few classes to help make development a joy instead of a pain in the neck.
+The idea here is that when you need to work on a small API with a few endpoints, a framework should not be anything more than a
+router + a few classes to help make development a joy instead of a pain in the neck.
 
 
 ## IMPORTANT NOTICE
 
-The only major thing that you need to know about Ionian is that it will be default as for one of these 3 content-types headers to be supplied (and valid of course)
+The only major thing that you need to know about Ionian is that it will by default ask for one of these 3 content-types headers to be supplied (and valid of course)
 when working with POST or PUT requests.
 
 application/x-www-form-urlencoded
+
 multipart/form-data
+
 application/json
 
 The framework does not parse any other body data and will throw a HTTP ERROR CODE 415 if anything else is provided.
@@ -24,13 +27,13 @@ The framework does not parse any other body data and will throw a HTTP ERROR COD
 
 If you also want to install the sample project do the following:
 
-3. Load the sample project SQL from the /Project folder
+3. Import the sample project SQL from the /Project folder into a database called **blogish**
 4. See index.php for possible routes
 
 
 ## Application Flow
 
-The incoming request gets directed by the .htaccess file into **index.php** where the application starts.
+The incoming request gets redirected by the .htaccess file into **index.php** where the application starts.
 
 The application is a router that has access to a few power functions such as setting the APP_MODE.
 
@@ -46,7 +49,7 @@ Your project will live inside of the **/Project** directory and your tests will 
 
 Ionian has multiple routers embedded that you can choose from. The current sample project uses the router called **Defined**.
 
-- **Defined** is a RESTful router that works basically the same way all other major routers do with the only exception of RegEx support.
+- **Defined** is a RESTful router that works basically the same way all other major routers do with the only exception being no RegEx support.
 
 - **Rapid** is an extremely fast and easy router that converts /user/add to UserController->addAction()
 
