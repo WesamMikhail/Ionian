@@ -3,11 +3,12 @@ namespace Ionian\App;
 
 use Ionian\Errors\Exceptions\HTTPException_400;
 use Ionian\Errors\Exceptions\HTTPException_404;
+use Ionian\Request\Request;
 use ReflectionMethod;
 
 class Rapid extends App {
     public function run() {
-        $resource = $this->getRequestedRoute();
+        $resource = Request::getInstance()->getRequestedRoute();
 
         if(count($resource) >= 2){
             $controller = '\\Project\\Controllers\\'. ucfirst($resource[0]) . "Controller";
@@ -24,7 +25,7 @@ class Rapid extends App {
                 $suppliedArgs = count($params);
 
                 if(($suppliedArgs >= $requiredArgs) && ($suppliedArgs <= $totalArgs)){
-                    $obj = new $controller();
+                    $obj = new $controller($this->db);
                     call_user_func_array(array($obj, $action), $params);
                 }
                 else
