@@ -20,7 +20,7 @@ use ReflectionMethod;
 
 /**
  * Class App
- * This is the application model in which every class instance is injected.
+ * This is the object in which every other class instance is injected.
  * The class instances are injected here because the App class knows how to handle dependencies.
  * It works as a form of "dumb" container.
  *
@@ -33,11 +33,34 @@ class App {
     const MODE_DEV = 0;
     const MODE_PROD = 1;
 
+    /**
+     * @var Request
+     */
     protected $request;
+
+    /**
+     * @var Response
+     */
     protected $response;
+
+    /**
+     * @var ModelFactory
+     */
     protected $modelFactory;
+
+    /**
+     * @var ControllerFactory
+     */
     protected $controllerFactory;
+
+    /**
+     * @var PDO
+     */
     protected $db;
+
+    /**
+     * @var RouterInterface
+     */
     protected $router;
 
     /**
