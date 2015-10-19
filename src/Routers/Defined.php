@@ -15,10 +15,10 @@ class Defined implements RouterInterface{
     /**
      * @var Map
      */
-    protected $router;
+    protected $simpleRouter;
 
     function __construct(){
-        $this->router = new Map;
+        $this->simpleRouter = new Map;
     }
 
     /**
@@ -28,7 +28,7 @@ class Defined implements RouterInterface{
      * @param $resource
      */
     public function get($route, $resource){
-        $this->router->get($route, $resource);
+        $this->simpleRouter->get($route, $resource);
     }
 
     /**
@@ -38,7 +38,7 @@ class Defined implements RouterInterface{
      * @param $resource
      */
     public function post($route, $resource){
-        $this->router->post($route, $resource);
+        $this->simpleRouter->post($route, $resource);
     }
 
     /**
@@ -48,7 +48,7 @@ class Defined implements RouterInterface{
      * @param $resource
      */
     public function put($route, $resource){
-        $this->router->put($route, $resource);
+        $this->simpleRouter->put($route, $resource);
     }
 
     /**
@@ -58,7 +58,7 @@ class Defined implements RouterInterface{
      * @param $resource
      */
     public function delete($route, $resource){
-        $this->router->delete($route, $resource);
+        $this->simpleRouter->delete($route, $resource);
     }
 
     /**
@@ -69,7 +69,7 @@ class Defined implements RouterInterface{
         $uri = $request->getRequestedResource();
         $method = $request->getMethod();
 
-        $match = $this->router->match($method, $uri);
+        $match = $this->simpleRouter->match($method, $uri);
 
         if($match === false)
             return false;
