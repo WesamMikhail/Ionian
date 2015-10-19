@@ -32,7 +32,7 @@ This repository is currently not available on packagist.org yet. To use it, add 
   ],
   "require": {
     "Lorenum/Ionian": "dev-master"
-  },
+  }
 ```
 
 Afterwards run
