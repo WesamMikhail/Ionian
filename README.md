@@ -28,10 +28,15 @@ This repository is currently not available on packagist.org yet. To use it, add 
     {
       "url": "https://github.com/WesamMikhail/Ionian.git",
       "type": "git"
+    },
+    {
+      "url": "https://github.com/WesamMikhail/SimpleRouter.git",
+      "type": "git"
     }
   ],
   "require": {
-    "Lorenum/Ionian": "dev-master"
+    "Lorenum/Ionian": "dev-master",
+    "Lorenum/SimpleRouter": "dev-master"
   }
 ```
 
