@@ -1,5 +1,0 @@
-#todo: handle white spaces in URLs asd.com/asd/ / / GIVES 403
-#ErrorDocument 403 Ionian\Errors\404.php
-
-RewriteEngine On
-RewriteRule ^(.*)$ index.php [PT,L]

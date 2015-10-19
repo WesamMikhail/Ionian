@@ -60,9 +60,7 @@ Ionian has multiple routers embedded that you can choose from. The current sampl
 ## TODO
 
 - Add framework tests
-
-- Add Rapid and Handles examples
-
-- Add Doc-Blocks
-
-
+    What if null is passed as DB into model
+- check how Response handles HTTPs in APP as well as ErrrorHandler
+- ControllerFactory and ModelFactory should only instantiate objects of the correct interface. Currently they can instantiate anything
+- update this readme

@@ -1,4 +1,9 @@
 {
+  "name": "Lorenum/Ionian",
+  "description": "Micro-framework for REST Micro-services",
+  "keywords": ["micro", "framework", "REST", "services"],
+  "license": "MIT",
+  "type": "project",
   "authors": [
     {
       "name": "Wesam Mikhail",
@@ -8,8 +13,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Ionian\\": "Ionian/",
-      "Project\\": "Project/"
+      "Lorenum\\Ionian\\": "src/"
     }
   },
   "repositories": [
