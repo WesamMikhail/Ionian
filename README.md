@@ -5,19 +5,18 @@ Ionian is a framework that was born out of frustration with almost all current f
 The idea behind Ionian is that micro-services are small by definition. Therefor, the last thing a framework needs to be
 is a huge cluster of classes that no one understand how they work together.
 
-At its core, Ionian is nothing more than a router talking to a container that instantiates the right classes for
-the requested resource. If needs be, the developer can extend and override ANY part of the framework to make it work
-in whatever he he/she sees fit.
+At its core, Ionian is nothing more than a container that instantiates the right classes for the requested resource.
+If needs be, the developer can extend and override ANY part of the framework to make it work in whatever way he/she deems fit.
 
 
 ## IMPORTANT NOTICE
 
-For POST and PUT requests, the proper **Content-Type** header must be sent by the client in order for the framework to parse
+For **POST** and **PUT** requests, the proper **Content-Type** header must be sent by the client in order for the framework to parse
 the data correctly. Currently, the supported types are:
 
-application/x-www-form-urlencoded
-multipart/form-data
-application/json
+- application/x-www-form-urlencoded
+- multipart/form-data
+- application/json
 
 
 ## Setup
@@ -50,8 +49,7 @@ You can find it here: https://github.com/WesamMikhail/Ionian_Sample_Project
 
 ## TODO
 
-- Add framework tests
-    What if null is passed as DB into model
+- Add framework tests --> What if null is passed as DB into model
 - check how Response handles HTTPs in APP as well as ErrrorHandler
 - ControllerFactory and ModelFactory should only instantiate objects of the correct interface. Currently they can instantiate anything
-- add composer PHP 5.6 restriction
+- add composer PHP 5.5 restriction
