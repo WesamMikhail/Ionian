@@ -26,12 +26,12 @@ Class Database{
      */
     public static function create($driver, $host, $db, $user, $password, array $options = []){
         $db = new PDO("$driver:dbname=$db;host=$host", $user, $password);
-        $defOtp = [
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false
-        ];
+        
+        if(!isset($options[PDO::ATTR_DEFAULT_FETCH_MODE]))
+            $options[PDO::ATTR_DEFAULT_FETCH_MODE] = PDO::FETCH_ASSOC;
 
-        $options = array_merge($defOtp, $options);
+        if(!isset($options[PDO::ATTR_EMULATE_PREPARES]))
+            $options[PDO::ATTR_EMULATE_PREPARES] = false;
 
         foreach($options as $key => $val){
             $db->setAttribute($key, $val);
