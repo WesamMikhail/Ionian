@@ -77,9 +77,21 @@ class ControllerFactory extends Factory{
         $this->modelFactory = $modelFactory;
     }
 
+    /**
+     * Get an instance of the desired class if it exists.
+     * Action is an optional parameter that returns a class instance if both the class AND the action exists within
+     *
+     * @param $class
+     * @param null $action
+     * @return false|mixed False if the class is not found or is not a subclass of Lorenum\Ionian\Core\Controller
+     */
     public function get($class, $action = null){
         $controller = parent::get($class, $action);
         if($controller !== false){
+
+            if(!is_subclass_of($controller, "\\Lorenum\\Ionian\\Core\\Controller"))
+                return false;
+
             $controller->setRequest($this->getRequest());
             $controller->setModels($this->getModelFactory());
             $controller->setResponse($this->getResponse());

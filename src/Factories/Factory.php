@@ -9,7 +9,7 @@ use Lorenum\Ionian\Utils\Explorer;
  *
  * @package Lorenum\Ionian\Factories
  */
-class Factory{
+class Factory implements FactoryInterface{
     protected $namespace;
 
     /**
