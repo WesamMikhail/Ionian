@@ -1,8 +1,8 @@
 <?php
 namespace Lorenum\Ionian\Errors;
 
-use Lorenum\Ionian\Errors\Exceptions\HTTPException;
-use Lorenum\Ionian\Errors\Exceptions\HTTPException_500;
+use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException;
+use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException_500;
 use Lorenum\Ionian\Response\JSONResponse;
 
 use Exception;

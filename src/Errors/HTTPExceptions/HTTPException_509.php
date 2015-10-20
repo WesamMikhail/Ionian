@@ -1,5 +1,5 @@
 <?php
-namespace Lorenum\Ionian\Errors\Exceptions;
+namespace Lorenum\Ionian\Errors\HTTPExceptions;
 
 /**
  * 509 Bandwidth Limit Exceeded (Apache bw/limited extension)

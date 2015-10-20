@@ -1,10 +1,10 @@
 <?php
 namespace Lorenum\Ionian\Core;
 
-use Lorenum\Ionian\Errors\Exceptions\HTTPException_400;
-use Lorenum\Ionian\Errors\Exceptions\HTTPException_404;
-use Lorenum\Ionian\Errors\Exceptions\HTTPException_405;
-use Lorenum\Ionian\Errors\Exceptions\HTTPException_500;
+use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException_400;
+use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException_404;
+use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException_405;
+use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException_500;
 use Lorenum\Ionian\Errors\ErrorHandler;
 use Lorenum\Ionian\Request\Parser;
 use Lorenum\Ionian\Request\Request;
