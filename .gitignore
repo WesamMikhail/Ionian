@@ -1,3 +1,8 @@
 .idea
 composer.lock
 /vendor
+
+/Project
+.htaccess
+settings.json
+index.php
