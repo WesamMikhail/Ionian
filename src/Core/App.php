@@ -1,31 +1,24 @@
 <?php
 namespace Lorenum\Ionian\Core;
 
+use Lorenum\Ionian\Errors\ApplicationExceptions\ArgumentException;
 use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException_400;
 use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException_404;
 use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException_405;
 use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException_500;
 use Lorenum\Ionian\Errors\ErrorHandler;
-use Lorenum\Ionian\Request\Parser;
-use Lorenum\Ionian\Request\Request;
-use Lorenum\Ionian\Response\JSONResponse;
-use Lorenum\Ionian\Response\ResponseInterface;
-use Lorenum\Ionian\Routers\Rapid;
-use Lorenum\Ionian\Routers\RouterInterface;
-use Lorenum\Ionian\Factories\ControllerFactory;
-use Lorenum\Ionian\Factories\ModelFactory;
+use Lorenum\Ionian\Errors\ApplicationExceptions\InstanceException;
+use Lorenum\Ionian\Utils\Explorer;
 
-use PDO;
 use ReflectionMethod;
 
 /**
  * Class App
- * This is the object in which every other class instance is injected.
- * The class instances are injected here because the App class knows how to handle dependencies.
- * It works as a form of "dumb" container.
+ * The main application to be instantiated by the procedural script.
+ * The application needs an ErrorMode flag in order to function properly depending on the environment.
  *
- * If no ControllerFactory is injected for instance, it will instead fallback on instantiating the default ControllerFactory.
- * The idea here is that you could inject your own classes with your own settings and this App module will know how to handle that.
+ * The App class knows only how to run itself according to the specified settings so make sure to include the correct settings
+ * for your app to function properly.
  *
  * @package Lorenum\Ionian\Core
  */
@@ -34,34 +27,9 @@ class App {
     const MODE_PROD = 1;
 
     /**
-     * @var Request
+     * @var AppSettings
      */
-    protected $request;
-
-    /**
-     * @var Response
-     */
-    protected $response;
-
-    /**
-     * @var ModelFactory
-     */
-    protected $modelFactory;
-
-    /**
-     * @var ControllerFactory
-     */
-    protected $controllerFactory;
-
-    /**
-     * @var PDO
-     */
-    protected $db;
-
-    /**
-     * @var RouterInterface
-     */
-    protected $router;
+    public $settings;
 
     /**
      * Creating an application requires you to state what mode it will be created in, development or production.
@@ -87,162 +55,59 @@ class App {
             ErrorHandler::registerErrorHandler();
             ErrorHandler::registerShutdownHandler();
         }
+
+        $this->settings = new AppSettings();
     }
 
     /**
-     * @return PDO
-     */
-    public function getDb() {
-        return $this->db;
-    }
-
-    /**
-     * @param PDO $db
-     */
-    public function setDb(PDO $db) {
-        $this->db = $db;
-    }
-
-    /**
-     * @return Request
-     */
-    public function getRequest() {
-        return $this->request;
-    }
-
-    /**
-     * @param Request $request
-     */
-    public function setRequest(Request $request) {
-        $this->request = $request;
-    }
-
-    /**
-     * @return ResponseInterface
-     */
-    public function getResponse() {
-        return $this->response;
-    }
-
-    /**
-     * @param ResponseInterface $response
-     */
-    public function setResponse(ResponseInterface $response) {
-        $this->response = $response;
-    }
-
-    /**
-     * @return ModelFactory
-     */
-    public function getModelFactory() {
-        return $this->modelFactory;
-    }
-
-    /**
-     * @param ModelFactory $modelFactory
-     */
-    public function setModelFactory(ModelFactory $modelFactory) {
-        $this->modelFactory = $modelFactory;
-    }
-
-    /**
-     * @return ControllerFactory
-     */
-    public function getControllerFactory() {
-        return $this->controllerFactory;
-    }
-
-    /**
-     * @param ControllerFactory $controllerFactory
-     */
-    public function setControllerFactory(ControllerFactory $controllerFactory) {
-        $this->controllerFactory = $controllerFactory;
-    }
-
-    /**
-     * @return RouterInterface
-     */
-    public function getRouter() {
-        return $this->router;
-    }
-
-    /**
-     * @param RouterInterface $router
-     */
-    public function setRouter(RouterInterface $router) {
-        $this->router = $router;
-    }
-
-    /**
-     * Runs the application by constructing each necessary object and injecting its dependencies.
-     * This run procedure is the CORE glue of all the framework's pieces.
-     *
-     * If an object is missing and not injected, the App will fallback and create a default object that will take its place.
+     * Runs the application according to the settings in the settings class variable.
+     * Prior to run(), $app->settings must contain at least a 'Request object', a 'Response object' and a 'Router object'.
      *
      * @throws HTTPException_400
      * @throws HTTPException_404
+     * @throws HTTPException_405
+     * @throws InstanceException
      */
     public function run(){
-        //Initiate fallback objects in case user never defined anything specific.
-        $this->init();
+        //Validate the content of settings
+        if(is_null($this->settings->getRequest()) || is_null($this->settings->getResponse()) || is_null($this->settings->getRouter()))
+            throw new ArgumentException("App settings must at least contain a 'Request object', a 'Response object' and a 'Router object'");
 
-        //Ask the specified router for a matching route
-        $route = $this->getRouter()->match($this->getRequest());
+        //Generate a Route object based on the Request and Router object in the container
+        $route = $this->settings->getRouter()->match($this->settings->getRequest());
 
         //If unable to find a route
-        if($route === false)
-            throw new HTTPException_404;
-
-        //Inject the needed objects into the factories
-        $this->getResponse()->setProtocol($this->getRequest()->getProtocol());
-        $this->getModelFactory()->setDb($this->getDb());
-        $this->getControllerFactory()->setRequest($this->getRequest());
-        $this->getControllerFactory()->setModelFactory($this->getModelFactory());
-        $this->getControllerFactory()->setResponse($this->getResponse());
-
-        //After injecting everything, ask the controller factory for a controller instance
-        $controller = $this->getControllerFactory()->get($route->getController(), $route->getAction());
-
-        //If controller or action were not found in the code
-        if($controller === false)
-            throw new HTTPException_404;
+        if($route === false)throw new HTTPException_404;
 
         //If route was found by the method was not allowed
-        if($controller === true)
-            throw new HTTPException_405;
+        if($route === true) throw new HTTPException_405;
+
+        //Fully qualify the controller's name
+        $class = $this->settings->getControllerNamespace() . $route->getControllerName();
+
+        //If the requested controller or action does not exist in the filesystem
+        if(!Explorer::checkIfClassExists($class, $route->getActionName()))
+            throw new HTTPException_404;
+
+        //Spawn the controller from the fully qualified class name
+        $controller = new $class($this->settings);
+
+        //Return false of the requested controller is not inherited from the Controller parent class
+        if(!is_subclass_of($class, "\\Lorenum\\Ionian\\Core\\Controller"))
+            throw new InstanceException("Class '$class' does not inherit from '\\Lorenum\\Ionian\\Core\\Controller'");
 
         //Check if the Action requested has arguments that must be supplied
-        $classMethod = new ReflectionMethod($controller, $route->getAction());
+        $classMethod = new ReflectionMethod($controller, $route->getActionName());
         $requiredArgs = $classMethod->getNumberOfRequiredParameters();
         $totalArgs = $classMethod->getNumberOfParameters();
         $suppliedArgs = count($route->getParams());
 
         //If the correct number of arguments supplied
         if(($suppliedArgs >= $requiredArgs) && ($suppliedArgs <= $totalArgs)){
-            call_user_func_array(array($controller, $route->getAction()), $route->getParams());
+            call_user_func_array(array($controller, $route->getActionName()), $route->getParams());
         }
         else {
             throw new HTTPException_400("URL parameter count does not match the expected number");
         }
-    }
-
-    /**
-     * Initiate default fallback classes in case no user-defined ones has been inserted
-     */
-    protected function init(){
-        if(!isset($this->request))
-            $this->setRequest(Parser::parseFromGlobals());
-
-        if(!isset($this->controllerFactory))
-            $this->setControllerFactory(new ControllerFactory());
-
-        if(!isset($this->modelFactory))
-            $this->setModelFactory(new ModelFactory());
-
-        if(!isset($this->router))
-            $this->setRouter(new Rapid());
-
-        if(!isset($this->response))
-            $this->setResponse(new JSONResponse());
     }
 }
