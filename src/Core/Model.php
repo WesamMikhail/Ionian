@@ -16,6 +16,10 @@ abstract class Model{
      */
     protected $db;
 
+    function __construct(PDO $db){
+        $this->setDb($db);
+    }
+
     /**
      * @return PDO
      */
