@@ -1,8 +1,8 @@
 <?php
 namespace Lorenum\Ionian\Database;
 
+use Lorenum\Ionian\Errors\ApplicationExceptions\ArgumentException;
 use PDO;
-use Exception;
 
 /**
  * Class Database
@@ -47,29 +47,29 @@ Class Database{
      * @param $filename
      * @param array $options
      * @return PDO
-     * @throws Exception
+     * @throws ArgumentException
      */
     public static function createFromJSONFile($filename, array $options = []){
         $file = file_get_contents($filename);
         $settings = json_decode($file, true);
 
         if(!isset($settings["database"]))
-            throw new Exception("Database credentials are missing");
+            throw new ArgumentException("Database credentials are missing");
 
         if(!isset($settings["database"]["driver"]))
-            throw new Exception("Database driver credential is missing");
+            throw new ArgumentException("Database driver credential is missing");
 
         if(!isset($settings["database"]["host"]))
-            throw new Exception("Database host credential is missing");
+            throw new ArgumentException("Database host credential is missing");
 
         if(!isset($settings["database"]["db"]))
-            throw new Exception("Database db credential is missing");
+            throw new ArgumentException("Database db credential is missing");
 
         if(!isset($settings["database"]["user"]))
-            throw new Exception("Database user credential is missing");
+            throw new ArgumentException("Database user credential is missing");
 
         if(!isset($settings["database"]["password"]))
-            throw new Exception("Database password credential is missing");
+            throw new ArgumentException("Database password credential is missing");
 
         return Database::create(
             $settings["database"]["driver"],
