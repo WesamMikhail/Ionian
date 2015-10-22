@@ -1,72 +1,104 @@
 <?php
 namespace Lorenum\Ionian\Core;
 
-use Lorenum\Ionian\Request\Request;
-use Lorenum\Ionian\Factories\ModelFactory;
-use Lorenum\Ionian\Response\ResponseInterface;
+use Lorenum\Ionian\Errors\ApplicationExceptions\ArgumentException;
+use Lorenum\Ionian\Errors\ApplicationExceptions\InstanceException;
+use Lorenum\Ionian\Utils\Explorer;
 
 /**
  * Class Controller
  * This class is the base class for all controllers.
- * It contains references, getters and setters for all necessary dependencies for a controller to run.
  *
  * @package Lorenum\Ionian\Core
  */
 abstract class Controller{
     /**
-     * @var Request
+     * @var AppSettings
      */
-    protected $request;
+    protected $settings;
 
-    /**
-     * @var ResponseInterface
-     */
-    protected $response;
-
-    /**
-     * @var ModelFactory
-     */
-    protected $models;
-
-    /**
-     * @return Request
-     */
-    public function getRequest() {
-        return $this->request;
+    function __construct(AppSettings $settings){
+        $this->settings = $settings;
     }
 
     /**
-     * @param Request $request
+     * @return AppSettings
      */
-    public function setRequest(Request $request) {
-        $this->request = $request;
+    public function getSettings() {
+        return $this->settings;
     }
 
     /**
-     * @return ModelFactory
+     * Get Query string field by key. same as $_GET
+     *
+     * @param $key
+     * @return mixed|null
      */
-    public function getModels() {
-        return $this->models;
+    public function getQuery($key){
+        return $this->getSettings()->getRequest()->query($key);
     }
 
     /**
-     * @param ModelFactory $models
+     * Get request body field by key. Same as $_POST
+     *
+     * @param $key
+     * @return mixed|null
      */
-    public function setModels(ModelFactory $models) {
-        $this->models = $models;
+    public function getBody($key){
+        return $this->getSettings()->getRequest()->body($key);
     }
 
     /**
-     * @return ResponseInterface
+     * Get header field by key.
+     * @param $key
+     * @return mixed|null
      */
-    public function getResponse() {
-        return $this->response;
+    public function getHeader($key){
+        return $this->getSettings()->getRequest()->header($key);
     }
 
     /**
-     * @param ResponseInterface $response
+     * Get the set DB connection
+     *
+     * @return \PDO
      */
-    public function setResponse(ResponseInterface $response) {
-        $this->response = $response;
+    public function getDb(){
+        return $this->getSettings()->getDb();
+    }
+
+    /**
+     * Get Response object
+     *
+     * @return \Lorenum\Ionian\Response\ResponseInterface
+     */
+    public function getResponse(){
+        return $this->getSettings()->getResponse();
+    }
+
+    /**
+     * Get a model instance by its name
+     *
+     * @param $name
+     * @return \Lorenum\Ionian\Core\Model subclass
+     * @throws ArgumentException
+     * @throws InstanceException
+     */
+    public function getModel($name){
+        //DB must be set in the container in order to inject it into the model
+        if(is_null($this->settings->getDb()))
+            throw new ArgumentException("Cannot create a model unless a DB connection is set in the container");
+
+        //Fully qualify the model name
+        $class = $this->settings->getModelNamespace() . $name;
+
+        //If the class does not exist in the filesystem
+        if(!Explorer::checkIfClassExists($class))
+            throw new InstanceException("The model '$class' could not be found in its namespace");
+
+        //If the model does not extend the base model
+        if(!is_subclass_of($class, "\\Lorenum\\Ionian\\Core\\Model"))
+            throw new InstanceException("Class '$class' does not inherit from '\\Lorenum\\Ionian\\Core\\Model'");
+
+        return new $class($this->settings->getDb());
     }
 }
