@@ -18,27 +18,6 @@ use Exception;
 class ErrorHandler{
 
     /**
-     * ALL Exceptions are caught and formatted into a response object regardless of type.
-     */
-    public static function registerExceptionHandler(){
-        set_exception_handler(function(Exception $e){
-            $status = "Internal Server Error";
-            $code = $e->getCode();
-            $message = $e->getMessage();
-
-            if($e instanceof HTTPException){
-                $status = $e->getStatus();
-            }
-
-            if($code == 0){
-                $code = 500;
-            }
-
-            ErrorHandler::handleJSON($code, $status, $message);
-        });
-    }
-
-    /**
      * ALL errors triggered by the user using "trigger_error" are caught and reformatted into a standard HTTPException_500
      */
     public static function registerErrorHandler(){
@@ -55,8 +34,30 @@ class ErrorHandler{
             $error = error_get_last();
 
             if($error !== null) {
-                ErrorHandler::handleJSON(500, "Internal Server Error", "Unexpected Error.");
+                ErrorHandler::handleJSON(500, "Internal Server Error", "Unexpected error caused a fatal shutdown. Please contact the server administrator about this problem");
             }
+        });
+    }
+
+    /**
+     * ALL Exceptions are caught and formatted into a response object regardless of type.
+     */
+    public static function registerExceptionHandler(){
+        set_exception_handler(function(Exception $e){
+            $code = 500;
+            $status = "Internal Server Error";
+            $message = 'Please contact an administrator about this error';
+
+            if($e instanceof HTTPException){
+                $code = $e->getCode();
+                $status = $e->getStatus();
+                $message = $e->getMessage();
+            }
+            else{
+                $message .= " - Internal Code: " . $e->getCode();
+            }
+
+            ErrorHandler::handleJSON($code, $status, $message);
         });
     }
 
