@@ -33,4 +33,8 @@ abstract class Model{
     public function setDb(PDO $db) {
         $this->db = $db;
     }
+
+    public function getLastInsertID(){
+        return $this->db->lastInsertId();
+    }
 }
