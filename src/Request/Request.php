@@ -6,7 +6,6 @@ namespace Lorenum\Ionian\Request;
  * This class substitutes the need for using the super-globals such as $_SERVER, $_GET, $_POST, etc.
  * All the information you might need from the super globals can be found in this object including URI parsing.
  *
- *
  * @package Lorenum\Ionian\Request
  */
 class Request{

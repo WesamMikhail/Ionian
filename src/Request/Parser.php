@@ -23,7 +23,7 @@ class Parser{
         $request->setUri($_SERVER["REQUEST_URI"]);
         $request->setScript($_SERVER["SCRIPT_NAME"]);
         $request->setQuery($_GET);
-        $request->setProtocol($_SERVER['SERVER_PROTOCOL']);
+        $request->setProtocol($_SERVER['SERVER_PROTOCOL']); //TODO change to a more reliable method for determining HTTPs
 
         //Get the IP - Guess at best
         if (!empty($_SERVER['HTTP_CLIENT_IP']))
