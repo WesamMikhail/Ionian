@@ -6,6 +6,8 @@ namespace Lorenum\Ionian\Errors\HTTPExceptions;
  * The server timed out waiting for the request.
  * According to HTTP specifications: "The client did not produce a request within the time that the server was prepared
  * to wait. The client MAY repeat the request without modifications at any later time."
+ *
+ * @package Lorenum\Ionian\Errors\HTTPExceptions
  */
 Class HTTPException_408 extends HTTPException{
     public function __construct($message = 'The client took too long to respond.') {

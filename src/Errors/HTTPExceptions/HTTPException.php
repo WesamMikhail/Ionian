@@ -7,7 +7,7 @@ use Exception;
  * Class HTTPException
  * Base user facing Exception class for Ionian framework
  *
- * @package Ionian\Errors\Exceptions
+ * @package Lorenum\Ionian\Errors\HTTPExceptions
  */
 class HTTPException extends Exception{
     protected $status;
