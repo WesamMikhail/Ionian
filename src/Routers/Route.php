@@ -8,36 +8,36 @@ namespace Lorenum\Ionian\Routers;
  * @package Lorenum\Ionian\Routers
  */
 class Route{
-    protected $controller;
-    protected $action;
+    protected $controllerName = '';
+    protected $actionName = '';
     protected $params = [];
 
     /**
      * @return string
      */
-    public function getController() {
-        return $this->controller;
+    public function getControllerName() {
+        return $this->controllerName;
     }
 
     /**
-     * @param string $controller
+     * @param string $controllerName
      */
-    public function setController($controller) {
-        $this->controller = $controller;
+    public function setControllerName($controllerName) {
+        $this->controllerName = $controllerName;
     }
 
     /**
      * @return string
      */
-    public function getAction() {
-        return $this->action;
+    public function getActionName() {
+        return $this->actionName;
     }
 
     /**
-     * @param string $action
+     * @param string $actionName
      */
-    public function setAction($action) {
-        $this->action = $action;
+    public function setActionName($actionName) {
+        $this->actionName = $actionName;
     }
 
     /**
@@ -53,6 +53,5 @@ class Route{
     public function setParams($params) {
         $this->params = $params;
     }
-
 
 }

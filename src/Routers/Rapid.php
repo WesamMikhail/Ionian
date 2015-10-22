@@ -33,8 +33,8 @@ class Rapid implements RouterInterface {
             }
 
             $route = new Route();
-            $route->setController($controller);
-            $route->setAction($action);
+            $route->setControllerName($controller);
+            $route->setActionName($action);
             $route->setParams($params);
 
             return $route;

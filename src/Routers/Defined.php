@@ -78,8 +78,8 @@ class Defined implements RouterInterface{
             return true;
 
         $route = new Route();
-        $route->setController($match["controller"]);
-        $route->setAction($match["action"]);
+        $route->setControllerName($match["controller"]);
+        $route->setActionName($match["action"]);
         $route->setParams($match["params"]);
 
         return $route;
