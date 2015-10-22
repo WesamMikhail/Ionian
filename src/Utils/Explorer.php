@@ -107,4 +107,22 @@ class Explorer {
             return false;
         return true;
     }
+
+    /**
+     * if $action is NULL the function runs Explorer::classExists
+     * else the function runs Explorer::classMethodExists
+     *
+     * @param $class
+     * @param null $action
+     * @return bool
+     */
+    public static function checkIfClassExists($class, $action = null){
+        if(is_null($action) && Explorer::classExists($class))
+            return true;
+
+        else if(Explorer::classMethodExists($class, $action))
+            return true;
+
+        return false;
+    }
 }

@@ -43,5 +43,33 @@ class Validator{
 
         return true;
     }
+
+    /**
+     * Check if string starts with substring
+     *
+     * @param $haystack
+     * @param $needle
+     * @return bool
+     */
+    public static function startsWith($haystack, $needle){
+        $length = strlen($needle);
+        return (substr($haystack, 0, $length) === $needle);
+    }
+
+    /**
+     * Check if string ends with substring
+     *
+     * @param $haystack
+     * @param $needle
+     * @return bool
+     */
+    public static function endsWith($haystack, $needle){
+        $length = strlen($needle);
+        if ($length == 0) {
+            return true;
+        }
+
+        return (substr($haystack, -$length) === $needle);
+    }
 }
 
