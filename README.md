@@ -54,7 +54,6 @@ You can find it here: https://github.com/WesamMikhail/Ionian_Sample_Project
 
 ## TODO
 
-- Add framework tests --> What if null is passed as DB into model
 - check how Response handles HTTPs in APP as well as ErrrorHandler
-- ControllerFactory and ModelFactory should only instantiate objects of the correct interface. Currently they can instantiate anything
 - add composer PHP 5.5 restriction
+- show in samples how you can wrap your own router and use it with Ionian instead of using defined
