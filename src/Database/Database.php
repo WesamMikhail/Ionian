@@ -30,9 +30,6 @@ Class Database{
         if(!isset($options[PDO::ATTR_DEFAULT_FETCH_MODE]))
             $options[PDO::ATTR_DEFAULT_FETCH_MODE] = PDO::FETCH_ASSOC;
 
-        if(!isset($options[PDO::ATTR_EMULATE_PREPARES]))
-            $options[PDO::ATTR_EMULATE_PREPARES] = false;
-
         foreach($options as $key => $val){
             $db->setAttribute($key, $val);
         }
