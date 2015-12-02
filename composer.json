@@ -17,7 +17,7 @@
     }
   },
   "require": {
-    "lorenum/simplerouter": "0.1a",
+    "lorenum/simplerouter": "0.1",
     "lorenum/utils" : "0.1"
   }
 }
