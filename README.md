@@ -19,28 +19,6 @@ the data correctly. Currently, the supported types are:
 - application/json
 
 
-## Setup
-
-This repository is currently not available on packagist.org yet. To use it, add the following to your **composer.json**
-
-```
-  "repositories": [
-    {
-      "url": "https://github.com/WesamMikhail/Ionian.git",
-      "type": "git"
-    }
-  ],
-  "require": {
-    "Lorenum/Ionian": "dev-master"
-  }
-```
-
-Afterwards run
-
-```
-composer install
-```
-
 ## How everything works:
 
 There is a simple project available that shows you how to setup your own project using this framework.
