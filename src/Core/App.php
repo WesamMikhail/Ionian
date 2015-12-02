@@ -8,7 +8,7 @@ use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException_405;
 use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException_500;
 use Lorenum\Ionian\Errors\ErrorHandler;
 use Lorenum\Ionian\Errors\ApplicationExceptions\InstanceException;
-use Lorenum\Ionian\Utils\Explorer;
+use Lorenum\Utils\Explorer;
 
 use ReflectionMethod;
 

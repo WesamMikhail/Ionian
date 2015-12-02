@@ -4,7 +4,7 @@ namespace Lorenum\Ionian\Core;
 use Lorenum\Ionian\Request\Request;
 use Lorenum\Ionian\Response\ResponseInterface;
 use Lorenum\Ionian\Routers\RouterInterface;
-use Lorenum\Ionian\Utils\Validator;
+use Lorenum\Utils\Validator;
 
 use PDO;
 

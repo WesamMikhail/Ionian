@@ -3,7 +3,7 @@ namespace Lorenum\Ionian\Core;
 
 use Lorenum\Ionian\Errors\ApplicationExceptions\ArgumentException;
 use Lorenum\Ionian\Errors\ApplicationExceptions\InstanceException;
-use Lorenum\Ionian\Utils\Explorer;
+use Lorenum\Utils\Explorer;
 
 /**
  * Class Controller
