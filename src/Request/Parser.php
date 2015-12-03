@@ -36,14 +36,24 @@ class Parser{
             $request->setIp($_SERVER['REMOTE_ADDR']);
 
 
-        //Set headers. This might not work if the server is not apache!
+        //Set headers.
         $headers = array();
-        foreach(getallheaders() as $key => $value) {
-            $key = str_replace(" ", "_", $key);
-            $key = str_replace("-", "_", $key);
-
-            $headers[$key] = $value;
+        if (!function_exists('getallheaders') && is_array($_SERVER))  {
+            foreach ($_SERVER as $name => $value) {
+                if (substr($name, 0, 5) == 'HTTP_') {
+                    $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+                }
+            }
         }
+        else{
+            foreach(getallheaders() as $key => $value) {
+                $key = str_replace(" ", "_", $key);
+                $key = str_replace("-", "_", $key);
+
+                $headers[$key] = $value;
+            }
+        }
+
         $request->setHeaders($headers);
 
 
