@@ -8,6 +8,9 @@ use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException_405;
 use Lorenum\Ionian\Errors\HTTPExceptions\HTTPException_500;
 use Lorenum\Ionian\Errors\ErrorHandler;
 use Lorenum\Ionian\Errors\ApplicationExceptions\InstanceException;
+use Lorenum\Ionian\Request\Parser;
+use Lorenum\Ionian\Response\JSONResponse;
+use Lorenum\Ionian\Routers\Rapid;
 use Lorenum\Utils\Explorer;
 
 use ReflectionMethod;
@@ -32,13 +35,13 @@ class App {
     public $settings;
 
     /**
-     * Creating an application requires you to state what mode it will be created in, development or production.
-     * use class constants App::MODE_*
+     * Ionian requires you to specify the mode it should be run in (see App::MODE_*)
      *
      * @param $mode
+     * @param AppSettings $settings Optional settings object
      * @throws HTTPException_500
      */
-    function __construct($mode){
+    function __construct($mode, AppSettings $settings = null){
         if($mode !== App::MODE_DEV && $mode !== App::MODE_PROD)
             throw new HTTPException_500("App mode is not supported");
 
@@ -56,7 +59,19 @@ class App {
             ErrorHandler::registerShutdownHandler();
         }
 
-        $this->settings = new AppSettings();
+        //Use default settings in case a settings object was not passed in.
+        $this->settings = $settings;
+        if(is_null($this->settings))
+            $this->settings = new AppSettings();
+
+        if(is_null($this->settings->getRequest()))
+            $this->settings->setRequest(Parser::parseFromGlobals());
+
+        if(is_null($this->settings->getResponse()));
+            $this->settings->setResponse(new JSONResponse());
+
+        if(is_null($this->settings->getRouter()))
+            $this->settings->setRouter(new Rapid());
     }
 
     /**
