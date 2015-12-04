@@ -28,7 +28,6 @@ You can find it here: https://github.com/WesamMikhail/Ionian_Sample_Project
 ## TODO
 
 - check how Response handles HTTPs in APP as well as ErrrorHandler
-- add composer PHP 5.5 restriction
 - show in samples how you can wrap your own router and use it with Ionian instead of using defined
 - fix IDE method hinting on dynamically loaded classes without @var set
 - add methods in Core\Controller for $this->response using __get() magic
