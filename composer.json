@@ -1,7 +1,7 @@
 {
   "name": "lorenum/ionian",
   "description": "Micro-services Framework for PHP 5.5+",
-  "keywords": ["micro", "framework", "REST", "services"],
+  "keywords": ["micro", "framework", "REST", "services", "php"],
   "license": "MIT",
   "type": "project",
   "authors": [
