@@ -19,6 +19,9 @@ class JSONResponse extends Response{
             $this->setCode(200);
             $this->setStatus("OK");
         }
+        
+        if(is_null($this->getProtocol()))
+            $this->setProtocol($_SERVER['SERVER_PROTOCOL']);
 
         //Compile the data into a list that will be sent to the client
         $result = [
